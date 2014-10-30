@@ -8,4 +8,4 @@ This is the possible Codebase for our not yet accepted Koding Hackathon team. If
 | Username | First Name |  Languages | Bio (short) | Role | Timezone | Email (or other contact) |
 | -------- | ---------- | ---------- | ----------- | ---- | -------- | ------------------------ |
 | Falkirks | Noah | PHP, JS, Node.js, Java, CSS | | | UTC-8 | falkirknh@gmail.com |
-| MegaSamNinja | Sam | - | | | - | - |
+| MegaSamNinja | Samuel | PHP, HTML Basic Phython/JS | | | GMT+11 | Samuel_ipad2@hotmail.com |
