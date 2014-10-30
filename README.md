@@ -7,6 +7,5 @@ This is the possible Codebase for our not yet accepted Koding Hackathon team. If
 * Falkirks (Leader/Head Developer)
 * MegaSamNinja (Developer)
 * 
-*
-*
-
+* 
+* 
