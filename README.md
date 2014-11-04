@@ -3,6 +3,9 @@ Hackathon
 
 This is the codebase for our not yet accepted Koding Hackathon team. Please keep on top of GitHub issues which require attention, we need to be organized.
 
+### IRC
+We now have an IRC channel. It is at **#teamshog** on **irc.freenode.net**. There is a robot (hubot) called chiphog who will be able to make your life that much better, but he will hog all the chips.
+
 ### Team members (in order of joining)
 
 | Username | First Name |  Languages | Bio (short) | Role | Timezone | Email (or other contact) |
