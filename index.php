@@ -1,1 +1,2 @@
-<?=Hello World!
+<?php
+echo "This is the main page!";
