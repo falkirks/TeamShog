@@ -1,7 +1,7 @@
 Hackathon
 =========
 
-This is the codebase for our not yet accepted Koding Hackathon team. Please keep on top of GitHub issues which require attention, we need to be organized.
+This is the codebase for our Koding Hackathon team. Please keep on top of GitHub issues which require attention, we need to be organized.
 
 ### IRC
 We now have a private IRC channel. It is at **#teamshog** on **irc.freenode.net**. There is a robot (hubot) called chiphog who will make your life that much better, but he will hog all the chips. **If you can't join you will need to create an issue requesting your IRC username is invited.**
