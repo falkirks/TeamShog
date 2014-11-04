@@ -1,4 +1,4 @@
-Hackathon
+Hackathon [![Build Status](https://magnum.travis-ci.com/Falkirks/Hackathon.svg?token=4QK2uxFbcdYPyhixDggt&branch=master)](https://magnum.travis-ci.com/Falkirks/Hackathon)
 =========
 
 This is the codebase for our Koding Hackathon team. Please keep on top of GitHub issues which require attention, we need to be organized.
