@@ -1,7 +1,7 @@
 Hackathon
 =========
 
-This is the codebase for our not yet accepted Koding Hackathon team.
+This is the codebase for our not yet accepted Koding Hackathon team. Please keep on top of GitHub issues which require attention, we need to be organized.
 
 ### Team members (in order of joining)
 
