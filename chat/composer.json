@@ -1,0 +1,12 @@
+{
+    "name": "teamshog/chat",
+    "description": "A simple chat service",
+    "license": "proprietary",
+    "require": {
+        "cboden/ratchet": "0.3.2",
+        "mustache/mustache": "1.0.0"
+    },
+    "autoload": {
+        "psr-4": {"shogchat\\": "src/"}
+    }
+}
