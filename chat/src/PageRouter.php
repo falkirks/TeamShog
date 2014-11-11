@@ -18,7 +18,7 @@ class PageRouter{
                     //TODO
                 }
                 else{
-                    (new index())->render();
+                    (new index())->showPage();
                 }
                 break;
         }
