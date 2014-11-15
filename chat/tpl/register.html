@@ -13,9 +13,13 @@
 </nav>
 <div class="container">
     {{#success}}
-        <div class="alert alert-info alert-dismissible" role="alert">
-            <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-            Registration done.
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title">Registration successful!</h3>
+            </div>
+            <div class="panel-body">
+                You have been registered with ShogChat.
+            </div>
         </div>
     {{/success}}
     {{^success}}
@@ -30,7 +34,13 @@
                 <label for="register-data">Registration Data</label>
                 <textarea class="form-control" rows="3" name="register-data" id="register-data"></textarea>
             </div>
-            <button type="submit" class="btn btn-success">Register</button>
+            <div class="form-group">
+                <label for="register-password">Password</label>
+                <input class="form-control" type="password" name="register-password" id="register-password">
+            </div>
+            <button type="submit" class="btn btn-success" id="register-btn">Register</button>
         </form>
+        <!-- Uncomment this to enable realtime validation of token -->
+        <!-- <script src="/assets/register.js"></script> -->
     {{/success}}
 </div>

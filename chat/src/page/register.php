@@ -5,23 +5,34 @@ use Github\Client;
 
 class register extends Page{
     public function showPage(){
-        if(isset($_POST["register-data"])){
+        if(isset($_POST["register-data"]) && isset($_POST["register-password"])){
             try{
                 $client = new Client();
                 $client->authenticate($_POST["register-data"], Client::AUTH_HTTP_TOKEN);
-                $users = $client->api('current_user')->follow()->all();
-                echo $this->getTemplateEngine()->render($this->getTemplateSnip("page"), [
-                    "title" => "Register",
-                    "content" => $this->getTemplateEngine()->render($this->getTemplate(), [
-                        "success" => true
-                    ])
-                ]);
+                $client->api('current_user')->follow()->all();
+                if(count($_POST["register-password"]) >= 6) {
+                    //TODO insert into database
+                    echo $this->getTemplateEngine()->render($this->getTemplateSnip("page"), [
+                        "title" => "Register",
+                        "content" => $this->getTemplateEngine()->render($this->getTemplate(), [
+                            "success" => true
+                        ])
+                    ]);
+                }
+                else{
+                    echo $this->getTemplateEngine()->render($this->getTemplateSnip("page"), [
+                        "title" => "Register",
+                        "content" => $this->getTemplateEngine()->render($this->getTemplate(), [
+                            "error" => "Passwords must be at least 6 characters long."
+                        ])
+                    ]);
+                }
             }
             catch(\Exception $e) {
                 echo $this->getTemplateEngine()->render($this->getTemplateSnip("page"), [
                     "title" => "Register",
                     "content" => $this->getTemplateEngine()->render($this->getTemplate(), [
-                        "error" => "Oh no! Something went awry with your registration."
+                        "error" => "Oh no! Your registration data doesn't appear valid."
                     ])
                 ]);
             }
