@@ -7,25 +7,40 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#"><span class="label label-default">ShogChat</span><i class="main-subtitle">->shogAllTheChats()</i></a>
+            <a class="navbar-brand" href="/"><span class="label label-default">ShogChat</span><i class="main-subtitle">->shogAllTheChats()</i></a>
         </div>
-        <div id="navbar" class="navbar-collapse collapse">
-            <ul class="nav navbar-nav navbar-right">
-                <li><a href="/login">Login</a></li>
-                <li><a href="/register">Register</a></li>
-            </ul>
-        </div>
+        {{#user}}
+            <div id="navbar-loggedin" class="navbar-collapse collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="/profile">{{_id}}</a></li>
+                    <li><a href="/logout">Logout</a></li>
+                </ul>
+            </div>
+        {{/user}}
+        {{^user}}
+            <div id="navbar" class="navbar-collapse collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="/login">Login</a></li>
+                    <li><a href="/register">Register</a></li>
+                </ul>
+            </div>
+        {{/user}}
     </div>
 </nav>
 <div class="container">
-    {{#error}}
-    <div class="alert alert-danger alert-dismissible" role="alert">
-        <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-        {{& error }}
-    </div>
-    {{/error}}
-    <div class="jumbotron">
-        <h1>ShogChat</h1>
-        <p>This is ShogChat; the elitist development chat service for GitHub. It's kinda like Gitter but <code>PHP_INT_MAX</code> times better. <b>shoghicp didn't create this, shoghicp will never know this exists.</b></p>
-    </div>
+    {{#message}}
+        <div class="alert alert-info alert-dismissible" role="alert">
+            <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+            {{& message }}
+        </div>
+    {{/message}}
+    {{#chat}}
+        {{& chat}}
+    {{/chat}}
+    {{^chat}}
+        <div class="jumbotron">
+            <h1>ShogChat</h1>
+            <p>This is ShogChat; the elitist development chat service for GitHub. It's kinda like Gitter but <code>PHP_INT_MAX</code> times better. <b>shoghicp didn't create this, shoghicp will never know this exists.</b></p>
+        </div>
+    {{/chat}}
 </div>

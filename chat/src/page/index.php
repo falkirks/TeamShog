@@ -1,23 +1,19 @@
 <?php
 namespace shogchat\page;
 
+use shogchat\session\SessionStore;
+
 class index extends Page{
-    public function showPage($error = false){
-        if($error === false) {
-            echo $this->getTemplateEngine()->render($this->getTemplateSnip("page"), [
-                "title" => "Welcome!",
-                "content" => $this->getTemplateEngine()->render($this->getTemplate(), [])
-            ]);
-        }
-        else{
+    public function showPage($message = false){
+            $user = SessionStore::getCurrentSession();
             echo $this->getTemplateEngine()->render($this->getTemplateSnip("page"), [
                 "title" => "Welcome!",
                 "content" => $this->getTemplateEngine()->render($this->getTemplate(), [
-                    "error" => $error
+                    "message" => ($message === false ? false : $message),
+                    "user" => ($user === false ? false : $user ),
+                    "chat" => ($user === false ? false : $this->getTemplateSnip("chat"))
                 ])
             ]);
-        }
-        //echo $this->getTemplateEngine()->render($this->getTemplate(), []);
     }
     public function hasPermission(){
         return true;

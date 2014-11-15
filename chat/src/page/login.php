@@ -2,18 +2,14 @@
 namespace shogchat\page;
 
 use shogchat\database\Users;
+use shogchat\session\SessionStore;
 
 class login extends Page{
     public function showPage(){
         if(isset($_POST["login-username"]) && isset($_POST["login-password"])){
             if(Users::checkLogin($_POST["login-username"], $_POST["login-password"])){
-                //TODO give them a session and redirect
-                echo $this->getTemplateEngine()->render($this->getTemplateSnip("page"), [
-                    "title" => "Login",
-                    "content" => $this->getTemplateEngine()->render($this->getTemplate(), [
-                        "error" => "Logged in."
-                    ])
-                ]);
+                SessionStore::createSession($_POST["login-username"]);
+                (new index())->showPage("You are now logged in.");
             }
             else{
                 echo $this->getTemplateEngine()->render($this->getTemplateSnip("page"), [

@@ -28,4 +28,35 @@ class Users{
             return false;
         }
     }
+    public static function userExists($name){
+        return MongoConnector::getUserCollection()->findOne(["_id" => $name]) !== null;
+    }
+    public static function getUser($name){
+        $user = MongoConnector::getUserCollection()->findOne(["_id" => $name]);
+        return ($user == null ? false : $user);
+    }
+    public static function addSession($name, $ip){
+        $user = Users::getUser($name);
+        if($user !== false){
+            $id = md5(time() . $_SERVER['REMOTE_ADDR']);
+            $user["sessions"][$id] = [
+                "ip" => $_SERVER['REMOTE_ADDR']
+            ];
+            MongoConnector::getUserCollection()->update(["_id" => $name], $user);
+            return $id;
+        }
+        else{
+            return false;
+        }
+    }
+    public static function deleteSession($name, $id){
+        $user = Users::getUser($name);
+        if($user !== false){
+            unset($user["sessions"][$id]);
+            MongoConnector::getUserCollection()->update(["_id" => $name], $user);
+        }
+        else{
+            return false;
+        }
+    }
 }
