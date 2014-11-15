@@ -21,7 +21,6 @@ class PageRouter{
             default:
                 if(class_exists("shogchat\\page\\$main") && is_subclass_of("shogchat\\page\\$main", "shogchat\\page\\Page")){
                     $page = "shogchat\\page\\$main";
-                    //TODO check permission
                     /** @var  Page */
                     $page = new $page();
                     if($page->hasPermission()){
@@ -29,7 +28,7 @@ class PageRouter{
                     }
                     else{
                         //TODO make prettier
-                        exit("403");
+                        (new index())->showPage("You don't have permission to access this page.");
                     }
                 }
                 else{
