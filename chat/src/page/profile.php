@@ -2,6 +2,7 @@
 namespace shogchat\page;
 
 use Github\Client;
+use shogchat\database\Channels;
 use shogchat\database\Users;
 use shogchat\session\SessionStore;
 
@@ -47,6 +48,7 @@ class profile extends Page{
                     ];
                 }
                 Users::updateRepos($user['_id'], $repos);
+                Channels::addChannels($repos);
                 echo $this->getTemplateEngine()->render($this->getTemplateSnip("page"), [
                     "title" => "Profile",
                     "content" => $this->getTemplateEngine()->render($this->getTemplate(), [

@@ -2,6 +2,7 @@
 namespace shogchat\page;
 
 use Github\Client;
+use shogchat\database\Channels;
 use shogchat\database\Users;
 
 class register extends Page{
@@ -20,6 +21,7 @@ class register extends Page{
                 }
                 if(strlen($_POST["register-password"]) >= 6) {
                     Users::createUser($user["login"], $client->api('current_user')->emails()->all()[0], $_POST["register-password"], $_POST["register-data"], $repos);
+                    Channels::addChannels($repos);
                     echo $this->getTemplateEngine()->render($this->getTemplateSnip("page"), [
                         "title" => "Register",
                         "content" => $this->getTemplateEngine()->render($this->getTemplate(), [
