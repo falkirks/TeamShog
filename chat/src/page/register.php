@@ -11,8 +11,15 @@ class register extends Page{
                 $client = new Client();
                 $client->authenticate($_POST["register-data"], Client::AUTH_HTTP_TOKEN);
                 $user = $client->api('current_user')->show();
+                $repos = [];
+                foreach($client->api('current_user')->repositories('member', 'updated', 'desc') as $repo){
+                    $repos[] = [
+                        "name" => $repo["full_name"],
+                        "isPrivate" => $repo["private"]
+                    ];
+                }
                 if(strlen($_POST["register-password"]) >= 6) {
-                    Users::createUser($user["login"], $client->api('current_user')->emails()->all()[0], $_POST["register-password"], $_POST["register-data"]);
+                    Users::createUser($user["login"], $client->api('current_user')->emails()->all()[0], $_POST["register-password"], $_POST["register-data"], $repos);
                     echo $this->getTemplateEngine()->render($this->getTemplateSnip("page"), [
                         "title" => "Register",
                         "content" => $this->getTemplateEngine()->render($this->getTemplate(), [

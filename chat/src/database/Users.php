@@ -2,7 +2,7 @@
 namespace shogchat\database;
 
 class Users{
-    public static function createUser($name, $email, $password, $token){
+    public static function createUser($name, $email, $password, $token, $repos = []){
         MongoConnector::getUserCollection()->insert([
             "_id" => $name,
             "email" => $email,
@@ -10,7 +10,7 @@ class Users{
             "token" => $token,
             "registration" => time(),
             "lastactive" => time(),
-            "channels" => [],
+            "repos" => $repos,
             "sessions" => []
         ]);
     }
@@ -63,6 +63,13 @@ class Users{
         return MongoConnector::getUserCollection()->update(["_id" => $name], [
             '$set' => [
                 "password" => md5($newpass)
+            ]
+        ]);
+    }
+    public static function updateRepos($name, $repos){
+        return MongoConnector::getUserCollection()->update(["_id" => $name], [
+            '$set' => [
+                "repos" => $repos
             ]
         ]);
     }
