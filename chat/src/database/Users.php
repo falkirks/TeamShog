@@ -59,4 +59,11 @@ class Users{
             return false;
         }
     }
+    public static function changePassword($name, $newpass){
+        return MongoConnector::getUserCollection()->update(["_id" => $name], [
+            '$set' => [
+                "password" => md5($newpass)
+            ]
+        ]);
+    }
 }

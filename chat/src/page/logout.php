@@ -9,6 +9,6 @@ class logout extends Page{
         (new index())->showPage("You are now logged out.");
     }
     public function hasPermission(){
-        return true;
+        return SessionStore::hasSession();
     }
 }
