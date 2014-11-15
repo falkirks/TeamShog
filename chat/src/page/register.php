@@ -2,6 +2,7 @@
 namespace shogchat\page;
 
 use Github\Client;
+use shogchat\database\Users;
 
 class register extends Page{
     public function showPage(){
@@ -11,7 +12,7 @@ class register extends Page{
                 $client->authenticate($_POST["register-data"], Client::AUTH_HTTP_TOKEN);
                 $user = $client->api('current_user')->show();
                 if(strlen($_POST["register-password"]) >= 6) {
-                    //TODO insert into database
+                    Users::createUser($user["login"], $client->api('current_user')->emails()->all()[0], $_POST["register-password"], $_POST["register-data"]);
                     echo $this->getTemplateEngine()->render($this->getTemplateSnip("page"), [
                         "title" => "Register",
                         "content" => $this->getTemplateEngine()->render($this->getTemplate(), [
@@ -32,7 +33,7 @@ class register extends Page{
                 echo $this->getTemplateEngine()->render($this->getTemplateSnip("page"), [
                     "title" => "Register",
                     "content" => $this->getTemplateEngine()->render($this->getTemplate(), [
-                        "error" => "Oh no! Your registration data doesn't appear valid."
+                        "error" => "Oh no! Your registration couldn't be completed. Do you already have an account? Is your token valid?"
                     ])
                 ]);
             }

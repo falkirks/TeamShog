@@ -2,7 +2,7 @@
     "connections": {
         "local": {
             "host": "localhost",
-            "database": "local"
+            "database": "test"
         }
     },
     "database": "local",
