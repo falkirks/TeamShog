@@ -19,6 +19,7 @@ class PageRouter{
             default:
                 if(class_exists("shogchat\\page\\$main") && is_subclass_of("shogchat\\page\\$main", "shogchat\\page\\Page")){
                     $page = "shogchat\\page\\$main";
+                    //TODO check permission
                     (new $page())->showPage();
                 }
                 else{

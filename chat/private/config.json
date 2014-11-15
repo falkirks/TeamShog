@@ -1,7 +1,11 @@
 {
-    "database": {
-
+    "connections": {
+        "local": {
+            "host": "localhost",
+            "database": "local"
+        }
     },
+    "database": "local",
     "github": {
 
     }
