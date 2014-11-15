@@ -1,17 +1,17 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>ShogChat</title>
+    <title>ShogChat {{title}}</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="A cool chat application">
     <!-- Bootstrap -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+    <!-- Theme (optional) -->
+    <link href="http://maxcdn.bootstrapcdn.com/bootswatch/3.3.0/darkly/bootstrap.min.css" rel="stylesheet">
     <link href="/assets/main.css" rel="stylesheet" media="screen">
 </head>
 <body>
-    <div class="container">
-        {{content}}
-    </div>
+    {{& content }}
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="http://code.jquery.com/jquery.js"></script>
     <!-- Bootstrap JS plugins -->
