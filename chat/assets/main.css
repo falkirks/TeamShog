@@ -8,3 +8,6 @@ body{
 .login-button{
     text-align: center;
 }
+.close-session-btn{
+    padding: 2px;
+}
