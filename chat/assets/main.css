@@ -4,3 +4,6 @@ body{
 .main-subtitle {
     font-size: smaller;
 }
+.login-button{
+    text-align: center;
+}

@@ -2,9 +2,11 @@
 namespace shogchat;
 
 use shogchat\page\index;
+use shogchat\page\Page;
 
 class PageRouter{
     public static function route(){
+        session_start();
         $path = strtok(isset($_SERVER['REQUEST_URI']) ? $_SERVER['REQUEST_URI'] : $_SERVER['PATH_INFO'], '?');
         $path = explode("/", ltrim($path, "/"));
         $main = array_shift($path);
@@ -20,7 +22,15 @@ class PageRouter{
                 if(class_exists("shogchat\\page\\$main") && is_subclass_of("shogchat\\page\\$main", "shogchat\\page\\Page")){
                     $page = "shogchat\\page\\$main";
                     //TODO check permission
-                    (new $page())->showPage();
+                    /** @var  Page */
+                    $page = new $page();
+                    if($page->hasPermission()){
+                        $page->showPage();
+                    }
+                    else{
+                        //TODO make prettier
+                        exit("403");
+                    }
                 }
                 else{
                     (new index())->showPage();
