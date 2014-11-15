@@ -12,17 +12,17 @@
     </div>
 </nav>
 <div class="container">
-    {{#success}}
+    {{#user}}
         <div class="panel panel-default">
             <div class="panel-heading">
                 <h3 class="panel-title">Registration successful!</h3>
             </div>
             <div class="panel-body">
-                You have been registered with ShogChat.
+                {{login}} you have been registered with ShogChat.
             </div>
         </div>
-    {{/success}}
-    {{^success}}
+    {{/user}}
+    {{^user}}
         {{#error}}
             <div class="alert alert-danger alert-dismissible" role="alert">
                 <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
@@ -42,5 +42,5 @@
         </form>
         <!-- Uncomment this to enable realtime validation of token -->
         <!-- <script src="/assets/register.js"></script> -->
-    {{/success}}
+    {{/user}}
 </div>
