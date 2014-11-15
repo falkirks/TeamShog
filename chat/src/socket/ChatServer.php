@@ -41,7 +41,7 @@ class ChatServer implements MessageComponentInterface{
      * @throws \Exception
      */
     function onMessage(ConnectionInterface $from, $msg){
-        // TODO: Implement onMessage() method.
+        Logger::info($msg);
     }
 
 }

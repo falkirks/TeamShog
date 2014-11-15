@@ -9,8 +9,9 @@ define("MAIN_PATH", realpath(__DIR__));
 if(php_sapi_name() === 'cli'){
     Logger::info("Starting socket server...");
     try {
-        $server = IoServer::factory(new ChatServer(), 8080);
-        $server->run();
+        $app = new Ratchet\App('localhost', 8080);
+        $app->route('/chat', new ChatServer());
+        $app->run();
     }
     catch(Exception $e){
         Logger::error($e->getMessage());
