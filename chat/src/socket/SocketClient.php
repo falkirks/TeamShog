@@ -9,8 +9,10 @@ class SocketClient{
     private $connectionInterface;
     private $authenticated = false;
     private $user;
+    private $channels;
     public function __construct(ConnectionInterface $connectionInterface){
         $this->connectionInterface = $connectionInterface;
+        $this->channels = [];
     }
 
     /**
@@ -41,7 +43,12 @@ class SocketClient{
             return false;
         }
     }
-
+    public function addChannel($name){
+        $this->channels[] = $name;
+    }
+    public function isMemberOf($name){
+        return in_array($name, $this->channels);
+    }
     /**
      * @return boolean
      */

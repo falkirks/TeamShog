@@ -56,6 +56,7 @@ var channelManager = function(){
     }
     this.addMessage = function(chan, message){
         this.chans[chan].messages.push(message);
+        this.renderMessageList();
     }
 };
 var channels = new channelManager();

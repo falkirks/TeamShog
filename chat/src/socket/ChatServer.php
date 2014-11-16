@@ -50,11 +50,23 @@ class ChatServer implements MessageComponentInterface{
      */
     function onMessage(ConnectionInterface $from, $msg){
         $json = json_decode($msg, true);
-        var_dump($json);
+        var_dump($msg);
         switch($json["type"]){
             case "message":
+                $out = $json;
+                $out["payload"]["message"] = [
+                    "content" => $out["payload"]["message"],
+                    "sender" => $this->clients->offsetGet($from)->getUser()['_id']
+                ];
+                $out = json_encode($out);
                 if($this->clients->offsetGet($from)->isAuthenticated()){
-
+                    if($this->clients->offsetGet($from)->isMemberOf($json["payload"]["channel"])){
+                        foreach($this->clients as $key){
+                            if($this->clients[$key]->isMemberOf($json["payload"]["channel"]) && $key != $from){
+                                $key->send($out);
+                            }
+                        }
+                    }
                 }
                 break;
             case "channel":
@@ -63,9 +75,15 @@ class ChatServer implements MessageComponentInterface{
                         $reply = $json;
                         $chan = Channels::getChannel($json["payload"]["channel"]);
                         if($chan !== null) {
-                            if (!$chan["isPrivate"] || Users::canAccessChannel($this->clients->offsetGet($from)->getUser()["_id"], $json["payload"]["channel"])) {
+                            if (!$chan["private"] && !in_array($this->clients->offsetGet($from)->getUser()['_id'], $chan["banned"])) {
                                 $reply["payload"]["verb"] = "add";
-                            } else {
+                                $this->clients->offsetGet($from)->addChannel( $json["payload"]["channel"]);
+                            }
+                            elseif(Users::isRepoOwner($this->clients->offsetGet($from)->getUser()["_id"], $json["payload"]["channel"])) {
+                                $reply["payload"]["verb"] = "add";
+                                $this->clients->offsetGet($from)->addChannel( $json["payload"]["channel"]);
+                            }
+                            else{
                                 $reply["payload"]["verb"] = "error";
                             }
                         }

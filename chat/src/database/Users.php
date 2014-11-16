@@ -73,7 +73,12 @@ class Users{
             ]
         ]);
     }
-    public static function canAccessChannel($user, $name){
-        return in_array($name, Users::getUser($name)["repos"]);
+    public static function isRepoOwner($user, $repo){
+        foreach(Users::getUser($user)["repos"] as $testRepo){
+            if($testRepo["name"] === $repo){
+                return  true;
+            }
+        }
+        return false;
     }
 }
