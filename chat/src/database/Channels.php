@@ -19,4 +19,7 @@ class Channels{
 
         }
     }
+    public static function getChannel($name){
+        return MongoConnector::getChannelCollection()->findOne(["_id" => $name]);
+    }
 }

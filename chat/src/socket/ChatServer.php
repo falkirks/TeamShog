@@ -3,15 +3,23 @@ namespace shogchat\socket;
 
 use Ratchet\ConnectionInterface;
 use Ratchet\MessageComponentInterface;
+use shogchat\database\Channels;
+use shogchat\database\Users;
 
 class ChatServer implements MessageComponentInterface{
+    /** @var \SplObjectStorage SocketClient[] */
+    private $clients;
+    public function __construct(){
+        $this->clients = new \SplObjectStorage;
+    }
+
     /**
      * When a new connection is opened it will be passed to this method
      * @param  ConnectionInterface $conn The socket/connection that just connected to your application
      * @throws \Exception
      */
     function onOpen(ConnectionInterface $conn){
-        // TODO: Implement onOpen() method.
+        $this->clients->attach($conn, new SocketClient($conn));
     }
 
     /**
@@ -20,7 +28,7 @@ class ChatServer implements MessageComponentInterface{
      * @throws \Exception
      */
     function onClose(ConnectionInterface $conn){
-        // TODO: Implement onClose() method.
+        $this->clients->detach($conn);
     }
 
     /**
@@ -31,7 +39,7 @@ class ChatServer implements MessageComponentInterface{
      * @throws \Exception
      */
     function onError(ConnectionInterface $conn, \Exception $e){
-        // TODO: Implement onError() method.
+        $conn->close();
     }
 
     /**
@@ -41,7 +49,45 @@ class ChatServer implements MessageComponentInterface{
      * @throws \Exception
      */
     function onMessage(ConnectionInterface $from, $msg){
-        Logger::info($msg);
+        $json = json_decode($msg, true);
+        var_dump($json);
+        switch($json["type"]){
+            case "message":
+                if($this->clients->offsetGet($from)->isAuthenticated()){
+
+                }
+                break;
+            case "channel":
+                if($this->clients->offsetGet($from)->isAuthenticated()) {
+                    if ($json["payload"]["verb"] == "add") {
+                        $reply = $json;
+                        $chan = Channels::getChannel($json["payload"]["channel"]);
+                        if($chan !== null) {
+                            if (!$chan["isPrivate"] || Users::canAccessChannel($this->clients->offsetGet($from)->getUser()["_id"], $json["payload"]["channel"])) {
+                                $reply["payload"]["verb"] = "add";
+                            } else {
+                                $reply["payload"]["verb"] = "error";
+                            }
+                        }
+                        else{
+                            $reply["payload"]["verb"] = "error";
+                        }
+                        $from->send(json_encode($reply));
+                    }
+                }
+                break;
+            case "auth":
+                $from->send(json_encode([
+                    "type" => "authreply",
+                    "payload" => [
+                        "done" => $this->clients->offsetGet($from)->authenticate($json["payload"])
+                    ]
+                ]));
+                break;
+            default:
+                Logger::warning("Bad message got.");
+                break;
+        }
     }
 
 }

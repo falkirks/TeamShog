@@ -11,7 +11,9 @@ class index extends Page{
                 "content" => $this->getTemplateEngine()->render($this->getTemplate(), [
                     "message" => ($message === false ? false : $message),
                     "user" => ($user === false ? false : $user ),
-                    "chat" => ($user === false ? false : $this->getTemplateSnip("chat"))
+                    "chat" => ($user === false ? false : $this->getTemplateEngine()->render($this->getTemplateSnip("chat"), [
+                        "session" => str_replace("\\", "$$", $_SESSION['login-data'])
+                    ]))
                 ])
             ]);
     }

@@ -20,6 +20,7 @@ var opts = {
 var target = document.getElementById('spinner');
 var spinner = new Spinner(opts).spin(target);
 var connected = false;
+var authed = false;
 var channelManager = function(){
     this.chans = {};
     this.currentChannel = false;
@@ -60,28 +61,69 @@ var channelManager = function(){
 var channels = new channelManager();
 
 ws.onopen = function(){
-    $(target).hide();
     connected = true;
+    ws.send(JSON.stringify({
+        type: "auth",
+        payload: {
+            key: session
+        }
+    }));
 };
 ws.onclose = function(){
     connected = false;
 };
-ws.onmessage = function(){
-
+ws.onmessage = function(evt){
+    var json = JSON.parse(evt.data);
+    switch(json.type){
+        case 'message':
+            channels.addMessage(json.payload.channel, json.payload.message);
+            break;
+        case 'authreply':
+            if(json.payload.done == true){
+                $(target).hide();
+                authed = true;
+            }
+            break;
+        case 'channel':
+            if(json.payload.verb == "add") {
+                channels.addChannel(json.payload.channel);
+                channels.renderChannelList();
+            }
+            else{
+                alert("Could not add channel.");
+            }
+            break;
+        default:
+            alert("Unrecognized message received from server.");
+            break;
+    }
 };
 $("#sendButton").on("click", function(){
-    channels.addMessage(channels.currentChannel, {
-        content: $("#messageInput").val(),
-        sender: "You"
-    });
-    $("#messageInput").val('');
-    console.log(channels.chans);
-    channels.renderMessageList();
+    if(channels.currentChannel != false) {
+        channels.addMessage(channels.currentChannel, {
+            content: $("#messageInput").val(),
+            sender: "You"
+        });
+        ws.send(JSON.stringify({
+            type: "message",
+            payload: {
+                channel: channels.currentChannel,
+                message: $("#messageInput").val()
+            }
+        }));
+        $("#messageInput").val('');
+        channels.renderMessageList();
+    }
 });
 $("#addChannelButton").on("click", function(){
-    channels.addChannel($("#channelInput").val());
+    ws.send(JSON.stringify({
+        type: "channel",
+        payload: {
+            channel: $("#channelInput").val(),
+            verb: "add"
+        }
+    }));
     $("#channelInput").val('');
-    channels.renderChannelList();
 });
 $('#channelHolder').on('click', 'td', function(){
    channels.setCurrentChan($(this).html());

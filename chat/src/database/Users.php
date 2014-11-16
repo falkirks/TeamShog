@@ -73,4 +73,7 @@ class Users{
             ]
         ]);
     }
+    public static function canAccessChannel($user, $name){
+        return in_array($name, Users::getUser($name)["repos"]);
+    }
 }
