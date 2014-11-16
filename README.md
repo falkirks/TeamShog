@@ -17,5 +17,5 @@ http://koding-hackathon.herokuapp.com
 | -------- | ---------- | ---------- | ----------- | ---- | -------- | ------------------------ |
 | Falkirks | Noah | PHP, JS, Node.js, Java, CSS | | | UTC-8 | falkirknh@gmail.com |
 | MegaSamNinja | Samuel | PHP, HTML, Basic Phython/JavaScript | https://twitter.com/MegaSam_ (Twitter says it all) | The Perfectionist / (back/front-end)Scripting| GMT+11 | Samuel_ipad2@hotmail.com |
-| TuffDev | Adam  | PHP, HTML, JavaScript (a little), CSS, MySQL, AJAX | | Perferably back-end scripting  | UTC-4 | cooladam98@gmail.com |
+| TuffDev | Adam  | PHP, HTML, JavaScript (a little), CSS, MySQL, AJAX | | Make suggestions and observe proceedings.  | UTC-4 | cooladam98@gmail.com |
 | PEMapModder | - | PHP, Java | - | - | GMT+8 | pemapmodder1970@gmail.com |
