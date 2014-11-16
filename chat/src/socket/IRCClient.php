@@ -138,11 +138,10 @@ class IRCClient{
             case "NICK":
                 foreach($this->server->getClients() as $client){
                     if(strtolower($client->getNick()) === $msg[1]){
-                        $this->send("That nickname is already in use.");
+                        $this->send("NOTICE AUTH :*** That nick is already in use..");
                         break;
                     }
                 }
-                $this->send("Nickname set.");
                 $this->setNick($msg[1]);
                 break;
             case "USER":
@@ -150,10 +149,10 @@ class IRCClient{
                     if (Users::checkLogin($msg[1], $this->password)) {
                         $this->setIdent($msg[1]);
                         $this->setRealName($msg[4]);
-                        $this->send("Logged in.");
+                        $this->send("NOTICE AUTH :*** Logged in.");
                     }
                     else{
-                        $this->send("Bad password.");
+                        $this->send("NOTICE AUTH :*** Bad password.");
                         $this->close();
                     }
                 }

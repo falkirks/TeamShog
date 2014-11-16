@@ -7,7 +7,7 @@ class IRCBridge{
     private $clients;
     public function __construct(){
         $this->socket = socket_create(AF_INET, SOCK_STREAM, SOL_TCP);
-        socket_bind($this->socket, "0.0.0.0", 6667);
+        socket_bind($this->socket, "0.0.0.0", 6668);
         socket_listen($this->socket, 25);
         socket_set_nonblock($this->socket);
         $this->clients = [];
