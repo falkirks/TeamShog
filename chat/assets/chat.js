@@ -27,7 +27,17 @@ var channelManager = function(){
     this.renderChannelList = function() {
         var out = '<table class="table table-bordered">';
         for (var chanName in this.chans) {
-            out += '<tr class="channelName"><td>' + chanName + '</td></tr>';
+            if(this.chans.hasOwnProperty(chanName)) {
+                if (chanName == this.currentChannel) {
+                    out += '<tr class="channelName active"><td>' + chanName + '</td></tr>';
+                }
+                else if (this.chans[chanName].hasNewMessage) {
+                    out += '<tr class="channelName warning"><td>' + chanName + '</td></tr>';
+                }
+                else {
+                    out += '<tr class="channelName"><td>' + chanName + '</td></tr>';
+                }
+            }
         }
         out += "</table>";
         $("#channelHolder").html(out);
@@ -45,18 +55,27 @@ var channelManager = function(){
     this.addChannel = function(name){
         if(this.chans[name] == null){
             this.chans[name] = {
-                messages: []
+                messages: [],
+                hasNewMessage: false
             };
         }
     };
     this.setCurrentChan = function(name) {
         this.currentChannel = name;
+        this.chans[name].hasNewMessage = false;
         this.renderMessageList();
+        this.renderChannelList();
         $("#nameHolder").html(name);
     }
     this.addMessage = function(chan, message){
         this.chans[chan].messages.push(message);
-        this.renderMessageList();
+        if(chan == this.currentChannel) {
+            this.renderMessageList();
+        }
+        else{
+            this.chans[chan].hasNewMessage = true;
+            this.renderChannelList();
+        }
     }
 };
 var channels = new channelManager();
@@ -103,7 +122,7 @@ $("#sendButton").on("click", function(){
     if(channels.currentChannel != false) {
         channels.addMessage(channels.currentChannel, {
             content: $("#messageInput").val(),
-            sender: "You"
+            sender: "<mark>" + session.split("$$")[0] + "</mark>"
         });
         ws.send(JSON.stringify({
             type: "message",
