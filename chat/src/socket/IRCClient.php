@@ -1,6 +1,8 @@
 <?php
 namespace shogchat\socket;
 
+use shogchat\database\Users;
+
 class IRCClient{
     private $socket;
     private $ip;
@@ -10,10 +12,15 @@ class IRCClient{
     private $buf;
     private $realName;
 
-    public function __construct($host, $ip, $socket){
+    private $password = false;
+    /** @var IRCBridge  */
+    private $server;
+
+    public function __construct($host, $ip, $socket, IRCBridge $server){
         $this->host = $host;
         $this->ip = $ip;
         $this->socket = $socket;
+        $this->server = $server;
     }
 
     /**
@@ -123,8 +130,44 @@ class IRCClient{
     }
     public function handleMessage($msg){
         Logger::info("Got $msg");
+        $msg = explode(" ", $msg);
+        switch($msg[0]){
+            case "PASS":
+                $this->password = trim($msg[1]);
+                break;
+            case "NICK":
+                foreach($this->server->getClients() as $client){
+                    if(strtolower($client->getNick()) === $msg[1]){
+                        $this->send("That nickname is already in use.");
+                        break;
+                    }
+                }
+                $this->send("Nickname set.");
+                $this->setNick($msg[1]);
+                break;
+            case "USER":
+                if($this->password) {
+                    if (Users::checkLogin($msg[1], $this->password)) {
+                        $this->setIdent($msg[1]);
+                        $this->setRealName($msg[4]);
+                        $this->send("Logged in.");
+                    }
+                    else{
+                        $this->send("Bad password.");
+                        $this->close();
+                    }
+                }
+                else{
+                    $this->send("You haven't set a password.");
+                    $this->close();
+                }
+                break;
+            default:
+                Logger::info($msg[0] . " is an unrecognized IRC command.");
+                break;
+        }
     }
     public function close(){
-        socket_close($this->getSocket());
+        $this->server->closeClient($this);
     }
 }

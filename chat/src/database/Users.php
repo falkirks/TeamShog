@@ -1,6 +1,8 @@
 <?php
 namespace shogchat\database;
 
+use shogchat\socket\Logger;
+
 class Users{
     public static function createUser($name, $email, $password, $token, $repos = []){
         MongoConnector::getUserCollection()->insert([
@@ -17,7 +19,7 @@ class Users{
     public static function checkLogin($name, $password){
         $user = MongoConnector::getUserCollection()->findOne(["_id" => $name]);
         if($user != null){
-            if($user["password"] === md5($password)){
+            if($user["password"] == md5($password)){
                 return true;
             }
             else{

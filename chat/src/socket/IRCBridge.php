@@ -7,7 +7,7 @@ class IRCBridge{
     private $clients;
     public function __construct(){
         $this->socket = socket_create(AF_INET, SOCK_STREAM, SOL_TCP);
-        socket_bind($this->socket, "0.0.0.0", 6668);
+        socket_bind($this->socket, "0.0.0.0", 6667);
         socket_listen($this->socket, 25);
         socket_set_nonblock($this->socket);
         $this->clients = [];
@@ -16,7 +16,7 @@ class IRCBridge{
         if ($client = @socket_accept($this->socket)) {
             socket_getpeername($client, $ip);
             $host = $this->dns_timeout($ip);
-            $client = new IRCClient($host, $ip, $client);
+            $client = new IRCClient($host, $ip, $client, $this);
             $client->send("NOTICE AUTH :*** Found your hostname." . "\r\n");
             $this->clients[] = $client;
 
@@ -53,11 +53,13 @@ class IRCBridge{
     /**
      * @return resource
      */
-    public function getSocket()
-    {
+    public function getSocket(){
         return $this->socket;
     }
-
+    public function closeClient(IRCClient $client){
+        socket_close($client->getSocket());
+        unset($this->clients[array_search($client, $this->clients)]);
+    }
     /**
      * @return IRCClient[]
      */
