@@ -1,4 +1,4 @@
-ws = new WebSocket("ws://localhost:8080/chat");
+ws = new WebSocket("ws://localhost:8080");
 var opts = {
     lines: 11, // The number of lines to draw
     length: 18, // The length of each line

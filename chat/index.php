@@ -9,9 +9,22 @@ define("MAIN_PATH", realpath(__DIR__));
 if(php_sapi_name() === 'cli'){
     Logger::info("Starting socket server...");
     try {
-        $app = new Ratchet\App('localhost', 8080);
-        $app->route('/chat', new ChatServer());
-        $app->run();
+        $server = IoServer::factory(
+            new \Ratchet\Http\HttpServer(
+                new \Ratchet\WebSocket\WsServer(
+                    new ChatServer()
+                )
+            ),
+            8080
+        );
+
+        $irc = new \shogchat\socket\IRCBridge();
+        while(is_resource($irc->getSocket())){
+            $server->loop->tick();
+            $irc->acceptConnection();
+            $irc->readConnections();
+        }
+        $irc->closeSockets();
     }
     catch(Exception $e){
         Logger::error($e->getMessage());
