@@ -11,3 +11,7 @@ body{
 .close-session-btn{
     padding: 2px;
 }
+#messageHolder{
+    min-height: 400px;
+    max-height: 400px;
+}

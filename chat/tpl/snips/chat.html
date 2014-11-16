@@ -1,11 +1,32 @@
 <div id="spinner"></div>
-<div class="panel panel-default">
-    <div class="panel-heading">
-        <h3 class="panel-title">Amazing chat interface here...</h3>
+<div class="col-md-9">
+    <div class="panel panel-default" id="messagePanel">
+        <div class="panel-heading">
+            <h3 class="panel-title" id="nameHolder"></h3>
+        </div>
+        <div class="panel-body" id="channelData">
+            <div id="messageHolder"></div>
+            <div class="input-group">
+                <input type="text" class="form-control" id="messageInput">
+                <span class="input-group-btn">
+                    <button class="btn btn-default" type="button" id="sendButton">Send</button>
+                </span>
+            </div>
+        </div>
     </div>
-    <div class="panel-body">
-        This is the chat interface, it is a snippet which can be loaded inside a template.
+</div>
+<div class="col-md-3">
+    <div class="panel panel-default" id="channelPanelOuter">
+        <div class="panel-body" id="channelPanel">
+            <div class="input-group">
+                <input type="text" class="form-control" id="channelInput">
+                <span class="input-group-btn">
+                    <button class="btn btn-default" type="button" id="addChannelButton">Add</button>
+                </span>
+            </div>
+        </div>
     </div>
+</div>
 </div>
 <!-- Spin.js -->
 <script src="http://fgnass.github.io/spin.js/spin.min.js"></script>
