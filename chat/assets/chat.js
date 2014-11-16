@@ -19,7 +19,63 @@ var opts = {
 };
 var target = document.getElementById('spinner');
 var spinner = new Spinner(opts).spin(target);
+var connected = false;
+var channelManager = function(){
+    this.chans = {};
+    this.currentChannel = false;
+    this.renderChannelList = function() {
+        var out = '<table class="table table-bordered">';
+        for (var chanName in this.chans) {
+            out += '<tr class="channelName"><td>' + chanName + '</td></tr>';
+        }
+        out += "</table>";
+        $("#channelHolder").html(out);
+    };
+    this.renderMessageList = function(){
+        if(this.currentChannel != null){
+            var out = "";
+            for(var i = 0; i < this.chans[this.currentChannel].messages.length; i++){
+                out += this.chans[this.currentChannel].messages[i].sender + " " + this.chans[this.currentChannel].messages[i].content;
+            }
+            $("#messagelHolder").html(out);
+        }
+    };
+    this.addChannel = function(name){
+        if(this.chans[name] == null){
+            this.chans[name] = {
+                "messages": []
+            };
+        }
+    };
+    this.setCurrentChan = function(name) {
+        this.currentChannel = name;
+        $("#nameHolder").html(name);
+    }
+    this.addMessage = function(chan, message){
+        this.chans[chan].messages.add(message);
+    }
+};
+var channels = new channelManager();
+
 ws.onopen = function(){
     $(target).hide();
+    connected = true;
+};
+ws.onclose = function(){
+    connected = false;
+};
+ws.onmessage = function(){
 
-}
+};
+$("#sendButton").on("click", function(){
+    alert("hey");
+});
+$("#addChannelButton").on("click", function(){
+    channels.addChannel($("#channelInput").val());
+    $("#channelInput").val('');
+    channels.renderChannelList();
+});
+$('#channelHolder').on('click', 'td', function(){
+    alert("hey");
+   channels.setCurrentChan($(this).html());
+});
