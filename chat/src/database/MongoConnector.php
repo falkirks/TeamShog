@@ -13,12 +13,6 @@ class MongoConnector{
         $m = new \MongoClient(Config::getConfig()["connections"][Config::getConfig()["database"]]["host"]);
         MongoConnector::$db = $m->selectDB(Config::getConfig()["connections"][Config::getConfig()["database"]]["database"]);
     }
-    public static function __callStatic($name, $args){
-        if(MongoConnector::$db == null){
-            MongoConnector::connect();
-        }
-        return MongoConnector::$db->$name(...$args);
-    }
     public static function getUserCollection(){
         if(MongoConnector::$db == null){
             MongoConnector::connect();
