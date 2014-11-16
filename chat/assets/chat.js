@@ -32,27 +32,29 @@ var channelManager = function(){
         $("#channelHolder").html(out);
     };
     this.renderMessageList = function(){
-        if(this.currentChannel != null){
-            var out = "";
+        if(this.currentChannel != false){
+            var out = '<table class="table">';
             for(var i = 0; i < this.chans[this.currentChannel].messages.length; i++){
-                out += this.chans[this.currentChannel].messages[i].sender + " " + this.chans[this.currentChannel].messages[i].content;
+                out += '<tr class="channelName">' + '<td style="width: 85px"><b>' + this.chans[this.currentChannel].messages[i].sender + "</b></td> <td>" + this.chans[this.currentChannel].messages[i].content + "</td>";
             }
-            $("#messagelHolder").html(out);
+            out += "</table>";
+            $("#messageHolder").html(out);
         }
     };
     this.addChannel = function(name){
         if(this.chans[name] == null){
             this.chans[name] = {
-                "messages": []
+                messages: []
             };
         }
     };
     this.setCurrentChan = function(name) {
         this.currentChannel = name;
+        this.renderMessageList();
         $("#nameHolder").html(name);
     }
     this.addMessage = function(chan, message){
-        this.chans[chan].messages.add(message);
+        this.chans[chan].messages.push(message);
     }
 };
 var channels = new channelManager();
@@ -68,7 +70,13 @@ ws.onmessage = function(){
 
 };
 $("#sendButton").on("click", function(){
-    alert("hey");
+    channels.addMessage(channels.currentChannel, {
+        content: $("#messageInput").val(),
+        sender: "You"
+    });
+    $("#messageInput").val('');
+    console.log(channels.chans);
+    channels.renderMessageList();
 });
 $("#addChannelButton").on("click", function(){
     channels.addChannel($("#channelInput").val());
@@ -76,6 +84,5 @@ $("#addChannelButton").on("click", function(){
     channels.renderChannelList();
 });
 $('#channelHolder').on('click', 'td', function(){
-    alert("hey");
    channels.setCurrentChan($(this).html());
 });
