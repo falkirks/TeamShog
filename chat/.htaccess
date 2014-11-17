@@ -1,3 +1,0 @@
-RewriteEngine on
-RewriteCond %{REQUEST_URI} !=/index.php
-RewriteRule !^assets($|/) index.php [L,QSA]
