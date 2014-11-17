@@ -57,7 +57,7 @@ class ChatServer implements MessageComponentInterface{
      */
     function onMessage(ConnectionInterface $from, $msg){
         $json = json_decode($msg, true);
-        var_dump($msg);
+        Logger::debug("WS message received: $msg");
         switch($json["type"]){
             case "message":
                 if($this->clients->offsetGet($from)->isAuthenticated()){

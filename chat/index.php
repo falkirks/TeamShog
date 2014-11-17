@@ -25,8 +25,6 @@ if(php_sapi_name() === 'cli'){
             $irc->acceptConnection();
             $irc->readConnections();
         }
-        $irc->closeSockets();
-        exit(0);
     }
     catch(Exception $e){
         Logger::error($e->getMessage());

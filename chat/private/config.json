@@ -8,5 +8,6 @@
     "database": "local",
     "github": {
 
-    }
+    },
+    "debug": false
 }

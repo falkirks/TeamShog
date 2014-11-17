@@ -123,7 +123,6 @@ class IRCClient implements Client{
      * @param mixed $nick
      */
     public function setNick($nick){
-        Logger::info("Nick set");
         $this->nick = trim($nick);
     }
 
@@ -135,14 +134,14 @@ class IRCClient implements Client{
         $this->send(":$from PRIVMSG $to :$msg");
     }
     public function send($msg){
-        Logger::info($msg);
+        Logger::debug("Sending to IRC: " . $msg);
         socket_write($this->getSocket(), $msg . "\r\n");
     }
     public function read(){
         return socket_read($this->getSocket(), 2048);
     }
     public function handleMessage($msg){
-        Logger::info("Got $msg");
+        Logger::debug("IRC message received: $msg");
         $msg = explode(" ", $msg);
         switch($msg[0]){
             case "PASS":
@@ -226,7 +225,7 @@ class IRCClient implements Client{
                 }
                 break;
             default:
-                Logger::info($msg[0] . " is an unrecognized IRC command.");
+                Logger::warning($msg[0] . " is an unrecognized IRC command.");
                 break;
         }
     }

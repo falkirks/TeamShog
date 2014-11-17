@@ -8,12 +8,16 @@ class IRCBridge{
     private $chatServer;
     public function __construct(ChatServer $chatServer){
         $this->socket = socket_create(AF_INET, SOCK_STREAM, SOL_TCP);
+        socket_set_option($this->socket, SOL_SOCKET, SO_REUSEADDR, 1);
         socket_bind($this->socket, "0.0.0.0", 6667);
         socket_listen($this->socket, 25);
         socket_set_nonblock($this->socket);
         $this->clients = [];
         $this->chatServer = $chatServer;
         $this->chatServer->bindToIRC($this);
+    }
+    public function __destruct(){
+        $this->closeSockets();
     }
     public function acceptConnection(){
         if ($client = @socket_accept($this->socket)) {
