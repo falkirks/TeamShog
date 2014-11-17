@@ -1,3 +1,31 @@
 ShogChat
 ========
-This will be our first (and hopefully last) test run. We are going to be building a chat application which has a pretty frontend, supports Github authentication and is driven by a web socket backend. The system will be divided into two components which will be run independently, the web application and the web socket server.
+ShogChat is a simple Gitter/IRC like app written in PHP. The core code was written in a weekend by @MegaSamNinja, @PEMapModder, @TuffDev, and @Falkirks.
+
+### Features
+* IRC type chat; no chat history
+* Web interface using WebSockets
+* IRC bridge (mostly compliant)
+* Mongo user accounts system
+* GitHub integration through Personal Access Token
+
+### Installing
+#### Dependencies
+* PHP 5.5 or greater
+* Composer 
+* Mongo and Mongo PHP Driver
+* cURL and cURL extension for PHP
+* A web server to run the website portion (php -S works for testing)
+
+#### Downloading and preparing
+* ```git clone [repo url]```
+* ```cd [repo name]```
+* ```php /path/to/composer.phar install```
+
+#### Running
+* ```cd /path/to/main/directory```
+* ```php index.php``` (Starts ws and IRC)
+* ```php -S localhost:80``` or whatever server you use.
+    
+
+
