@@ -9,10 +9,17 @@ use shogchat\database\Users;
 class ChatServer implements MessageComponentInterface{
     /** @var \SplObjectStorage SocketClient[] */
     private $clients;
+    /** @var  IRCBridge */
+    private $irc;
     public function __construct(){
         $this->clients = new \SplObjectStorage;
     }
-
+    public function bindToIRC(IRCBridge $bridge){
+        $this->irc = $bridge;
+    }
+    public function isBridged(){
+        return $this->irc instanceof IRCBridge;
+    }
     /**
      * When a new connection is opened it will be passed to this method
      * @param  ConnectionInterface $conn The socket/connection that just connected to your application
@@ -53,18 +60,11 @@ class ChatServer implements MessageComponentInterface{
         var_dump($msg);
         switch($json["type"]){
             case "message":
-                $out = $json;
-                $out["payload"]["message"] = [
-                    "content" => $out["payload"]["message"],
-                    "sender" => $this->clients->offsetGet($from)->getUser()['_id']
-                ];
-                $out = json_encode($out);
                 if($this->clients->offsetGet($from)->isAuthenticated()){
                     if($this->clients->offsetGet($from)->isMemberOf($json["payload"]["channel"])){
-                        foreach($this->clients as $key){
-                            if($this->clients[$key]->isMemberOf($json["payload"]["channel"]) && $key != $from){
-                                $key->send($out);
-                            }
+                        $this->sendMessageToChannel($json["payload"]["message"], $from, $json["payload"]["channel"]);
+                        if($this->isBridged()){
+                            $this->irc->sendMessageToChannel($json["payload"]["message"], "{$this->clients[$from]->getUser()["_id"]}!{$this->clients[$from]->getUser()["_id"]}@{$from->remoteAddress}", $json["payload"]["channel"]);
                         }
                     }
                 }
@@ -108,4 +108,30 @@ class ChatServer implements MessageComponentInterface{
         }
     }
 
+    /**
+     * @return \SplObjectStorage
+     */
+    public function getClients(){
+        return $this->clients;
+    }
+    public function sendMessageToChannel($msg, $from, $chan){
+        $out = [
+            "type" => "message",
+            "payload" => [
+                "message" => [
+                    "content" => $msg,
+                    "sender" => ($from instanceof ConnectionInterface ? $this->clients[$from]->getUser()["_id"] : $from)
+                ],
+                "channel" => $chan
+            ]
+        ];
+        $out = json_encode($out);
+        foreach($this->clients as $key){
+            if($this->clients[$key]->isMemberOf($chan)){
+                if($from != $key) {
+                    $key->send($out);
+                }
+            }
+        }
+    }
 }

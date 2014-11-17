@@ -4,7 +4,7 @@ namespace shogchat\socket;
 use Ratchet\ConnectionInterface;
 use shogchat\database\Users;
 
-class SocketClient{
+class SocketClient implements Client{
     /** @var ConnectionInterface  */
     private $connectionInterface;
     private $authenticated = false;

@@ -5,12 +5,15 @@ class IRCBridge{
     private $socket;
     /** @var IRCClient[] */
     private $clients;
-    public function __construct(){
+    private $chatServer;
+    public function __construct(ChatServer $chatServer){
         $this->socket = socket_create(AF_INET, SOCK_STREAM, SOL_TCP);
         socket_bind($this->socket, "0.0.0.0", 6668);
         socket_listen($this->socket, 25);
         socket_set_nonblock($this->socket);
         $this->clients = [];
+        $this->chatServer = $chatServer;
+        $this->chatServer->bindToIRC($this);
     }
     public function acceptConnection(){
         if ($client = @socket_accept($this->socket)) {
@@ -65,6 +68,22 @@ class IRCBridge{
      */
     public function getClients(){
         return $this->clients;
+    }
+    public function sendMessageToChannel($msg, $from, $chan){
+        foreach($this->clients as $client){
+            if($client->isMemberOf($chan)){
+                if(!$from instanceof ChatServer || $from != $client) {
+                    $client->sendMessage($msg, $from, "#$chan");
+                }
+            }
+        }
+    }
+
+    /**
+     * @return ChatServer
+     */
+    public function getChatServer(){
+        return $this->chatServer;
     }
 
 }

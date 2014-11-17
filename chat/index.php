@@ -9,16 +9,17 @@ define("MAIN_PATH", realpath(__DIR__));
 if(php_sapi_name() === 'cli'){
     Logger::info("Starting socket server...");
     try {
+        $chat = new ChatServer();
         $server = IoServer::factory(
             new \Ratchet\Http\HttpServer(
                 new \Ratchet\WebSocket\WsServer(
-                    new ChatServer()
+                    $chat
                 )
             ),
             8080
         );
 
-        $irc = new \shogchat\socket\IRCBridge();
+        $irc = new \shogchat\socket\IRCBridge($chat);
         while(is_resource($irc->getSocket())){
             $server->loop->tick();
             $irc->acceptConnection();
