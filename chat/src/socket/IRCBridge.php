@@ -42,6 +42,7 @@ class IRCBridge{
         foreach($this->clients as $client){
             $client->close();
         }
+        socket_shutdown($this->getSocket());
         socket_close($this->getSocket());
     }
     public function dns_timeout($ip) {
@@ -60,6 +61,7 @@ class IRCBridge{
         return $this->socket;
     }
     public function closeClient(IRCClient $client){
+        socket_shutdown($client->getSocket());
         socket_close($client->getSocket());
         unset($this->clients[array_search($client, $this->clients)]);
     }

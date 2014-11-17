@@ -166,8 +166,10 @@ class IRCClient implements Client{
                         $this->sendNumerical("002 {$this->nick} :Your host is shogchat, running version a development build.");
                         $this->sendNumerical("003 {$this->nick} :This server was created " . @date( 'r' ));
 
-                        $this->sendNumerical("375 {$this->nick} :=== Welcome to the ShogChat IRC bridge ====");
+                        $this->sendNumerical("375 {$this->nick} :=== Welcome to ShogChat IRC Bridge ====");
                         $this->sendNumerical("372 {$this->nick} :You are connected to the IRC bridge as {$this->nick}. All of your GitHub repos have a channel, just join the channel with the name of your repo and start chatting. If you get an error saying the channel doesn't exist, you might need to reload your repos on our website.");
+                        $this->sendNumerical("372 {$this->nick} :-----------------------------");
+                        $this->sendNumerical("372 {$this->nick} :(ShogChat)->shogAllTheChats()");
                         $this->sendNumerical("376 {$this->nick} :End of MOTD");
 
                         $this->sendNumerical("NICK " . $this->nick);

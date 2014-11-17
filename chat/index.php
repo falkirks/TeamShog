@@ -7,7 +7,6 @@ use shogchat\socket\Logger;
 require 'vendor/autoload.php';
 define("MAIN_PATH", realpath(__DIR__));
 if(php_sapi_name() === 'cli'){
-    Logger::info("Starting socket server...");
     try {
         $chat = new ChatServer();
         $server = IoServer::factory(
@@ -18,14 +17,16 @@ if(php_sapi_name() === 'cli'){
             ),
             8080
         );
-
+        Logger::info("Started WebSocket server.");
         $irc = new \shogchat\socket\IRCBridge($chat);
-        while(is_resource($irc->getSocket())){
+        Logger::info("Started IRC server.");
+        while(true){
             $server->loop->tick();
             $irc->acceptConnection();
             $irc->readConnections();
         }
         $irc->closeSockets();
+        exit(0);
     }
     catch(Exception $e){
         Logger::error($e->getMessage());
