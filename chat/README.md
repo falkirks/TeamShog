@@ -29,3 +29,5 @@ ShogChat is a simple Gitter/IRC like app written in PHP. The core code was writt
     
 ### Screenshots
 ![Web chat interface](http://i.imgur.com/6zz1qWh.png)
+
+![Settings Pane](http://i.imgur.com/JMCHYUJ.png)
