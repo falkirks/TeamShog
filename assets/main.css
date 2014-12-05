@@ -1,0 +1,29 @@
+body{
+    padding-top: 70px;
+    padding-bottom: 70px;
+}
+.main-subtitle {
+    font-size: smaller;
+}
+.login-button{
+    text-align: center;
+}
+.close-session-btn{
+    padding: 2px;
+    float: right;
+}
+#messageHolder{
+    min-height: 400px;
+    max-height: 400px;
+    overflow-y: auto;
+    height: 100px;
+}
+.channelRemove{
+    float: right;
+}
+#requestNotificationButton{
+    float: right;
+}
+.reloadrepo-btn{
+    float: right;
+}

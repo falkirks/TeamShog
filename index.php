@@ -1,2 +1,6 @@
 <?php
-echo "This is the main page!";
+use water\PageRouter;
+
+require 'vendor/autoload.php';
+define("MAIN_PATH", realpath(__DIR__));
+PageRouter::route();

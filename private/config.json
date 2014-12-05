@@ -1,0 +1,10 @@
+{
+    "connections": {
+        "local": {
+            "uri": "localhost",
+            "database": "test"
+        }
+    },
+    "database": "local",
+    "debug": false
+}
