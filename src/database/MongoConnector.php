@@ -14,7 +14,7 @@ class MongoConnector{
     public static function connect(){
         if(getenv("MONGOLAB_URI") !== false){
             $m = new \MongoClient(getenv("MONGOLAB_URI"));
-            MongoConnector::$db = $m->selectDB($m->listDBs()[0]);
+            MongoConnector::$db = $m->selectDB($m->listDBs()[0]); //TODO
         }
         else {
             $m = new \MongoClient(Config::getConfig()["connections"][Config::getConfig()["database"]]["uri"]);
