@@ -9,27 +9,32 @@ class Domains{
             "documents" => $documents
         ]);
     }
-    public static function addDocument($domain, $name, $text, $summarized){
+    public static function addDocument($domain, $name, $url, $text, $summarized){
         MongoConnector::getDomainsCollection()->update(["_id" => $domain], [
             '$push' => [
                 "documents" => [
                     "name" => $name,
                     "updated" => time(),
+                    "url" => $url,
                     "text" => $text,
-                    "summary" => $summarized
+                    "summary" => $summarized,
+                    "active" => true
                 ]
             ]
         ]);
     }
-    public static function updateDocument($domain, $id, $text, $summarized){
+    public static function updateDocument($domain, $id, $text, $summarized, $active = true){
         $domain = Domains::getDomain($domain);
         if($domain !== false){
             $domain["documents"][$id] = [
                 "name" => $domain["documents"][$id]["name"],
                 "updated" => time(),
+                "url" => $domain["documents"][$id]["url"],
                 "text" => $text,
-                "summarized" => $summarized
+                "summarized" => $summarized,
+                "active" => $active
             ];
+            Domains::updateDomain($domain);
             return true;
         }
         else{
