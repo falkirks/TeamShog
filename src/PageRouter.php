@@ -5,11 +5,13 @@ use water\page\index;
 use water\page\Page;
 
 class PageRouter{
+    static protected $path = false;
     public static function route(){
         session_start();
         $path = strtok(isset($_SERVER['REQUEST_URI']) ? $_SERVER['REQUEST_URI'] : $_SERVER['PATH_INFO'], '?');
         $path = explode("/", ltrim($path, "/"));
         $main = array_shift($path);
+        PageRouter::$path = $path;
         /*
          * NOTE
          *  Only add pages to the switch if you need to. In most cases they can just be autoloaded.
@@ -36,5 +38,8 @@ class PageRouter{
                 }
                 break;
         }
+    }
+    public static function getPath(){
+        return PageRouter::$path;
     }
 }
