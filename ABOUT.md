@@ -1,6 +1,6 @@
 TeamShog
 ========
-We are TeamShog. We are a group of high school students from around the world that has picked a really strange name.
+We are TeamShog. We are a group of high school students from around the world that have picked a really strange name.
 
 ### Noah (Falkirks)
 Noah is an avid web developer, amateur actor and active procrastinator. While avoiding doing school work he is able to find time to write assorted PHP, Java, and JavaScript apps that do somewhat useful things. Noah loves to write beautiful and simple code. 
