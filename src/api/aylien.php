@@ -3,7 +3,7 @@
 namespace water\api;
 
 
-class aylien {
+class Aylien {
     public static function call_api($endpoint, $parameters) {
         $ch = curl_init('https://api.aylien.com/api/v1/' . $endpoint);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);

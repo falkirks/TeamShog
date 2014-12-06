@@ -9,7 +9,7 @@
 namespace water\api;
 
 
-class algorithm {
+class Algorithm {
 
     var $wordstat;
     var $stopwords;
