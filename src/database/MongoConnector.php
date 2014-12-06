@@ -13,7 +13,8 @@ class MongoConnector{
     public static function connect(){
         if(getenv("MONGOLAB_URI") !== false){
             $m = new \MongoClient(getenv("MONGOLAB_URI"));
-            MongoConnector::$db = $m->selectDB(end(explode("/", getenv("MONGOLAB_URI")))); //TODO
+            $arr = explode("/", getenv("MONGOLAB_URI")); //For strict
+            MongoConnector::$db = $m->selectDB(end($arr)); //TODO
         }
         else {
             $m = new \MongoClient(Config::getConfig()["connections"][Config::getConfig()["database"]]["uri"]);
