@@ -22,7 +22,7 @@ class view extends Page{
                     "message" => ($message === false ? false : $message),
                     "user" => $user,
                     "textview" => false,
-                    "domain" => DomainCache::getDomain(PageRouter::getPath()[0]),
+                    "domain" => $this->transformDomainArray(DomainCache::getDomain(PageRouter::getPath()[0])),
                     "document" => false
                 ])
             ]);
@@ -42,6 +42,12 @@ class view extends Page{
                 ])
             ]);
         }
+    }
+    public function transformDomainArray($arr){
+        foreach($arr["documents"] as $i => $item){
+            $arr["documents"][$i]["id"] = $i;
+        }
+        return $arr;
     }
     public function hasPermission(){
         return true;
