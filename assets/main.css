@@ -35,3 +35,12 @@ body{
     border-radius: 5px;
     text-align: center
 }
+
+.view1 {
+    width: 40%;
+    float: left;
+}
+.view2 {
+    width: 40%;
+    float: right;
+}
