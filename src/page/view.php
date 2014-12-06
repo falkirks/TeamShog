@@ -55,7 +55,7 @@ class view extends Page{
                     "user" => $user,
                     "textview" => true,
                     "domain" => $this->transformDomainArray(DomainCache::getDomain(PageRouter::getPath()[0])),
-                    "document" => DomainCache::getDocument(PageRouter::getPath()[0], PageRouter::getPath()[1])["drafts"][PageRouter::getPath()[2]],
+                    "document" => Domains::getDraft(PageRouter::getPath()[0], PageRouter::getPath()[1], PageRouter::getPath()[2]),
                     "isDraft" => true
                 ])
             ]);
