@@ -34,8 +34,12 @@
             <p>THIS IS A PLACEHOLDER</p>
         </div>
         <div class="view2">
-            <h3>Translated TOS TOS</h3>
-            <p>THIS IS ALSO A PLACEHOLDER</p>
+            <h3>Translated TOS</h3>
+            <p>
+                <?php
+                water\algorithm\Summary
+                ?>
+            </p>
         </div>
     </div>
 </div>

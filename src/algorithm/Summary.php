@@ -14,53 +14,53 @@ class Summary {
     var $wordstat;
     var $stopwords;
 
-    function Summary(){
+    public function Summary(){
         global $stopwords;
         $this->wordstat = array();
         $this->stopwords = $stopwords;
     }
 
-    public function Summarize($text,$percent=0.25,$minimum_sent=1,$maximum_sent=0){
-        $lines = $this->sentence_splitter($text);
+    public static function Summarize($text,$percent=0.25,$minimum_sent=1,$maximum_sent=0){
+        $lines = self::sentence_splitter($text);
         $line_array = array();
 
         for($i=0;$i<count($lines);$i++){
-            $words = $this->sentence_splitter($text);
+            $words = self::sentence_splitter($text);
             $wordstat = array();
             foreach ($words as $word){
 
-                if(in_array($word, $this->stopwords)) continue;
+                if(in_array($word, self::stopwords)) continue;
                 //TODO:Match stems
 
-                if(in_array($wordstat[$word])){
+                if(!isset($wordstat[$word])){
                     $wordstat[$word]=1;
                 }else{
                     $wordstat[$word]++;
                 }
 
-                if(!isset($this->wordstat[$word])) {
-                    $this->wordstat[$word] = 1;
+                if(!isset(self::$wordstat[$word])) {
+                    self::$wordstat[$word] = 1;
                 }else {
-                    $this->wordstat[$word]++;
+                    self::$wordstat[$word]++;
                 }
             }
             $line_array[] = array(
-                'sentnece' => $sentences[$i],
+                'sentnece' => $lines[$i],
                 'wordstat' => $wordstat,
                 'ord' => $i
             );
 
         }
-        arsort($this->wordstat);
+        arsort(self::$wordstat);
         //Take top 25 only
-        $this->wordstat = array_slice($this->wordstat,0,25);
+        self::$wordstat = array_slice(self::wordstat,0,25);
 
         for($i=0;$i<count($line_array);$i++){
-            $importance = $this->calculate_importance($line_array[$i]['wordstat']);
+            $importance = self::calculate_importance($line_array[$i]['wordstat']);
             $line_array[$i]['importance'] = $importance;
         }
         //Sort according to importance
-        usort($line_array,array(&$this, 'arraycomparison_rating'));
+        usort($line_array,array(self, 'arraycomparison_rating'));
         if ($maximum_sent===0) $maximum_sent = count($line_array);
         $summary_count = min(
             $maximum_sent,
@@ -73,7 +73,7 @@ class Summary {
             $summary_count = 1;
         }
         $line_array = array_slice($line_array, -$summary_count);
-        usort($line_array,array(&$this, 'arraycomparsion_ord'));
+        usort($line_array,array(self, 'arraycomparsion_ord'));
         $line_array = array();
         foreach($line_array as $sentence){
             $summary[] = $sentence['sentence'];
@@ -82,11 +82,11 @@ class Summary {
     }
 
     public function arraycomparison_rating($vara, $varb){
-        return $this->cmp_arrays($vara, $varb, 'rating');
+        return $this->arraycomparison($vara, $varb, 'rating');
     }
 
     public function arraycomparison_order($vara, $varb){
-        return $this->cmp_arrays($vara, $varb, 'ord');
+        return $this->arraycomparison($vara, $varb, 'ord');
     }
 
     public function arraycomparison($vara, $varb, $key){
@@ -106,6 +106,7 @@ class Summary {
             $wordrate = $count * $this->wordstat[$word];
             $rating += $wordrate;
         }
+        return $rating;
     }
 
     public static function word_splitter($text){
