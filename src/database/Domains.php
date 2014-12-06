@@ -41,6 +41,17 @@ class Domains{
             return false;
         }
     }
+    public static function setDocument($domain, $id, $document){
+        $domain = Domains::getDomain($domain);
+        if($domain !== false){
+            $domain["documents"][$id] = $document;
+            Domains::updateDomain($domain);
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
     public static function getDocument($domain, $id){
         $domain = Domains::getDomain($domain);
         if($domain !== false){

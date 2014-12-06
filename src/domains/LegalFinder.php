@@ -38,17 +38,21 @@ class LegalFinder{
                 "name" => $name,
                 "url" => $path,
                 "text" => $text["content"],
-                "summarized" => "" //TODO
+                "updated" => time(),
+                "summarized" => "", //TODO
+                "active" => true
             ];
         }
         return $new;
     }
-    public function getUpdatedDoc($url){
+    public static function getUpdatedDoc($url){
         $text = LegalFinder::getTextURL($url);
         if($text !== false){
             return [
                 "text" => $text["content"],
-                "summarized" => "" //TODO
+                "summarized" => "", //TODO
+                "updated" => time(),
+                "active" => true
             ];
         }
         else{
