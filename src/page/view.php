@@ -23,11 +23,12 @@ class view extends Page{
                     "user" => $user,
                     "textview" => false,
                     "domain" => $this->transformDomainArray(DomainCache::getDomain(PageRouter::getPath()[0])),
-                    "document" => false
+                    "document" => false,
+                    "isDraft" => false
                 ])
             ]);
         }
-        else{
+        elseif(count(PageRouter::getPath()) == 2){
             /*
              * Display side by side view
              */
@@ -37,8 +38,25 @@ class view extends Page{
                     "message" => ($message === false ? false : $message),
                     "user" => $user,
                     "textview" => true,
-                    "domain" => DomainCache::getDomain(PageRouter::getPath()[0]),
-                    "document" => DomainCache::getDocument(PageRouter::getPath()[0], PageRouter::getPath()[1])
+                    "domain" => $this->transformDomainArray(DomainCache::getDomain(PageRouter::getPath()[0])),
+                    "document" => DomainCache::getDocument(PageRouter::getPath()[0], PageRouter::getPath()[1]),
+                    "isDraft" => false
+                ])
+            ]);
+        }
+        else{
+            /*
+             * Display side by side view of a user draft
+             */
+            echo $this->getTemplateEngine()->render($this->getTemplateSnip("page"), [
+                "title" => "View",
+                "content" => $this->getTemplateEngine()->render($this->getTemplate(), [
+                    "message" => ($message === false ? false : $message),
+                    "user" => $user,
+                    "textview" => true,
+                    "domain" => $this->transformDomainArray(DomainCache::getDomain(PageRouter::getPath()[0])),
+                    "document" => DomainCache::getDocument(PageRouter::getPath()[0], PageRouter::getPath()[1])["drafts"][PageRouter::getPath()[2]],
+                    "isDraft" => true
                 ])
             ]);
         }

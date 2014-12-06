@@ -18,10 +18,54 @@ class Domains{
                     "url" => $url,
                     "text" => $text,
                     "summary" => $summarized,
-                    "active" => true
+                    "active" => true,
+                    "drafts" => []
                 ]
             ]
         ]);
+    }
+    public static function getDraft($domain, $id, $draftid){
+        $doc = Domains::getDocument($domain, $id);
+        if($doc !== false){
+            if(isset($doc["drafts"][$draftid])){
+                $doc["drafts"][$draftid]["draftid"] = $draftid; // Just in case
+                return $doc["drafts"][$draftid]["draftid"];
+            }
+            else{
+                return false;
+            }
+        }
+        else{
+            return false;
+        }
+    }
+    public static function addDraft($domain, $id, $text, $summary, $user){
+        $doc = Domains::getDocument($domain, $id);
+        if($doc !== false){
+            $doc["drafts"][] = [
+                "draftid" => count($doc["drafts"]),
+                "text" => $text,
+                "summary" => $summary,
+                "user" => $user
+            ];
+        }
+        else{
+            return false;
+        }
+    }
+    public static function updateDraft($domain, $id, $draftid, $text, $summary){
+        $doc = Domains::getDocument($domain, $id);
+        if($doc !== false && isset($doc["drafts"][$draftid])){
+            Domains::setDocument($domain, $id, array_merge($doc["drafts"][$draftid], ["text" => $text, "summary" => $summary]));
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+    public static function userHasDraftAccess($user, $domain, $id, $draftid){
+        $draft = Domains::getDraft($domain, $id, $draftid);
+        return $draft !== false && $draft["user"] === $user;
     }
     public static function updateDocument($domain, $id, $text, $summarized, $active = true){
         $domain = Domains::getDomain($domain);
@@ -31,8 +75,9 @@ class Domains{
                 "updated" => time(),
                 "url" => $domain["documents"][$id]["url"],
                 "text" => $text,
-                "summarized" => $summarized,
-                "active" => $active
+                "summary" => $summarized,
+                "active" => $active,
+                "drafts" => $domain["documents"][$id]["drafts"]
             ];
             Domains::updateDomain($domain);
             return true;
@@ -56,6 +101,7 @@ class Domains{
         $domain = Domains::getDomain($domain);
         if($domain !== false){
             if(isset($domain["documents"][$id])){
+                $domain["documents"][$id]["id"] = $id;
                 return $domain["documents"][$id];
             }
             else{

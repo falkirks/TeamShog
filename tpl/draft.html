@@ -1,0 +1,88 @@
+<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="container">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="/">TOSThing</a>
+        </div>
+        {{#user}}
+        <div id="navbar-loggedin" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav navbar-right">
+                <li><a>{{_id}}</a></li>
+                <li><a href="/logout">Logout</a></li>
+            </ul>
+        </div>
+        {{/user}}
+        {{^user}}
+        <div id="navbar" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="/login">Login</a></li>
+                <li><a href="/register">Register</a></li>
+            </ul>
+        </div>
+        {{/user}}
+    </div>
+</nav>
+<div class="container">
+    {{#message}}
+    <div class="alert alert-info alert-dismissible" role="alert">
+        <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        {{& message }}
+    </div>
+    {{/message}}
+    {{#document}}
+    {{#currentDraft}}
+    <div class="row">
+        <div class="col-md-4">
+            <h3>Original TOS</h3>
+            <iframe seamless src="{{url}}"></iframe>
+        </div>
+        <div class="col-md-4">
+            <h3>Extracted text</h3>
+            <textarea name="step1" form="draft">{{text}}</textarea>
+        </div>
+        <div class="col-md-4">
+            <h3>Summary</h3>
+            <p>Now do your best to summarize the points of the TOS. This is <b>your</b> draft so be as biased as you want.</p>
+            <textarea name="step2" form="draft">{{summary}}</textarea>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <form id="draft" action="/draft/{{domainname}}/{{id}}/{{draftid}}" method="post">
+                <input type="submit" value="Submit Draft" class="btn btn-block btn-default">
+            </form>
+        </div>
+    </div>
+    {{/currentDraft}}
+    {{^currentDraft}}
+    <div class="row">
+        <div class="col-md-4">
+            <h3>Original TOS</h3>
+            <iframe seamless src="{{url}}"></iframe>
+        </div>
+        <div class="col-md-4">
+            <h3>Step 1</h3>
+            <p>Your first task is to simply cut and paste the document. Try to remove all the other fluff.</p>
+            <textarea name="step1" form="draft"></textarea>
+        </div>
+        <div class="col-md-4">
+            <h3>Step 2</h3>
+            <p>Now do your best to summarize the points of the TOS. This is <b>your</b> draft so be as biased as you want.</p>
+            <textarea name="step2" form="draft"></textarea>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <form id="draft" action="/draft/{{domainname}}/{{id}}" method="post">
+                <input type="submit" value="Submit Draft" class="btn btn-block btn-default">
+            </form>
+        </div>
+    </div>
+    {{/currentDraft}}
+    {{/document}}
+    {{^document}}
+    <div class="alert alert-warning alert-dismissible" role="alert">
+        <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        That document could not be found.
+    </div>
+    {{/document}}
+</div>

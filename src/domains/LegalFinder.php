@@ -37,7 +37,7 @@ class LegalFinder{
                         "url" => $path,
                         "text" => $text["content"],
                         "updated" => time(),
-                        "summarized" => "", //TODO
+                        "summary" => "", //TODO
                         "active" => true
                     ];
                     break;
@@ -52,7 +52,7 @@ class LegalFinder{
         if($text !== false){
             return [
                 "text" => $text["content"],
-                "summarized" => "", //TODO
+                "summary" => "", //TODO
                 "updated" => time(),
                 "active" => true
             ];
