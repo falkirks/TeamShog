@@ -8,17 +8,31 @@
  */
 namespace water\api;
 
+//List of common words from Open Text Summarizer
+Algorithm::$stopwords = array(
+	'--', '-', 'a', 'about', 'again', 'all', 'along', 'almost', 'also', 'always', 'am', 'among', 'an', 'and',
+	'another', 'any', 'anybody', 'anything', 'anywhere', 'apart', 'are', 'around', 'as', 'at', 'be', 'because',
+	'been', 'before', 'being', 'between', 'both', 'but', 'by', 'can', 'cannot', 'comes', 'could', 'couldn', 'did',
+	'didn','different', 'do', 'does', 'doesn', 'done', 'don', 'down', 'during', 'each', 'either', 'enough', 'etc',
+	'even', 'every', 'everybody', 'everything', 'everywhere', 'except', 'few', 'final', 'first', 'for', 'from',
+	'get', 'go', 'goes', 'gone', 'good', 'got', 'had', 'has', 'have', 'having', 'he', 'hence', 'her', 'him', 'his',
+	'how', 'however', 'i', 'i.e', 'if', 'in', 'initial', 'into', 'is', 'isn', 'it', 'its', 'it', 'itself', 'just',
+	'last','least', 'less', 'let', 'lets', 'let\'s', 'like', 'lot', 'made', 'make', 'many', 'may', 'maybe', 'me',
+	'might', 'mine', 'more', 'most', 'Mr', 'much', 'must', 'my', 'near', 'need', 'next', 'niether', 'no', 'nobody',
+	'nor', 'not', 'nothing', 'now', 'nowhere', 'of', 'off', 'often', 'oh', 'ok', 'okay', 'on', 'once', 'one',
+	'only', 'onto', 'or', 'other', 'our', 'ours', 'out', 'over', 'own', 'perhaps', 'previous', 'quite', 'rather',
+	're', 'really', 's', 'said', 'same', 'say', 'see', 'seems', 'several', 'shall', 'she', 'should',
+	'shouldn\'t', 'since', 'so', 'some', 'somebody', 'something', 'somewhere', 'still', 'stuff', 'such', 'than',
+	't', 'that', 'the', 'their', 'theirs', 'them', 'then', 'there', 'these', 'they', 'thing', 'things', 'this',
+	'those', 'through', 'thus', 'to', 'too', 'top', 'two', 'under', 'unless', 'until', 'up', 'upon', 'us',
+	'use', 'v', 've', 'very', 'want', 'was', 'we', 'well', 'went', 'were', 'what', 'when', 'where', 'which',
+	'while', 'who', 'whom', 'why', 'will', 'with', 'without', 'won', 'would', 'x', 'yes', 'yet', 'you', 'you',
+	'your', 'yours', 'll', 'm', 'shouldn', 'won\'t', 'hadn'
+);
 
 class Algorithm {
-
-    var $wordstat;
-    var $stopwords;
-
-    public function Summary(){
-        global $stopwords;
-        $this->wordstat = array();
-        $this->stopwords = $stopwords;
-    }
+    public static $wordstat = [];
+    public static $stopwords;
 
     public static function Summarize($text,$percent=0.25,$minimum_sent=1,$maximum_sent=0){
         $lines = self::sentence_splitter($text);
@@ -29,7 +43,7 @@ class Algorithm {
             $wordstat = array();
             foreach ($words as $word){
 
-                if(in_array($word, self::stopwords)) continue;
+                if(in_array($word, self::$stopwords)) continue;
                 //TODO:Match stems
 
                 if(!isset($wordstat[$word])){
@@ -53,14 +67,14 @@ class Algorithm {
         }
         arsort(self::$wordstat);
         //Take top 25 only
-        self::$wordstat = array_slice(self::wordstat,0,25);
+        self::$wordstat = array_slice(self::$wordstat,0,25);
 
         for($i=0;$i<count($line_array);$i++){
             $importance = self::calculate_importance($line_array[$i]['wordstat']);
             $line_array[$i]['importance'] = $importance;
         }
         //Sort according to importance
-        usort($line_array,array(self, 'arraycomparison_rating'));
+        usort($line_array,array(get_class(), 'arraycomparison_rating'));
         if ($maximum_sent===0) $maximum_sent = count($line_array);
         $summary_count = min(
             $maximum_sent,
@@ -73,8 +87,9 @@ class Algorithm {
             $summary_count = 1;
         }
         $line_array = array_slice($line_array, -$summary_count);
-        usort($line_array,array(self, 'arraycomparsion_ord'));
+        usort($line_array,array(get_class(), 'arraycomparsion_ord'));
         $line_array = array();
+	    $summary = [];
         foreach($line_array as $sentence){
             $summary[] = $sentence['sentence'];
         }
@@ -102,8 +117,8 @@ class Algorithm {
         //TODO:Improve rating
         $rating = 0;
         foreach ($text as $word=>$count){
-            if(!isset($this->wordstat[$word])) continue;
-            $wordrate = $count * $this->wordstat[$word];
+            if(!isset(self::$wordstat[$word])) continue;
+            $wordrate = $count * self::$wordstat[$word];
             $rating += $wordrate;
         }
         return $rating;
@@ -137,24 +152,3 @@ class Algorithm {
         }
     }
 }
-//List of common words from Open Text Summarizer
-$stopwords = array(
-    '--', '-', 'a', 'about', 'again', 'all', 'along', 'almost', 'also', 'always', 'am', 'among', 'an', 'and',
-    'another', 'any', 'anybody', 'anything', 'anywhere', 'apart', 'are', 'around', 'as', 'at', 'be', 'because',
-    'been', 'before', 'being', 'between', 'both', 'but', 'by', 'can', 'cannot', 'comes', 'could', 'couldn', 'did',
-    'didn','different', 'do', 'does', 'doesn', 'done', 'don', 'down', 'during', 'each', 'either', 'enough', 'etc',
-    'even', 'every', 'everybody', 'everything', 'everywhere', 'except', 'few', 'final', 'first', 'for', 'from',
-    'get', 'go', 'goes', 'gone', 'good', 'got', 'had', 'has', 'have', 'having', 'he', 'hence', 'her', 'him', 'his',
-    'how', 'however', 'i', 'i.e', 'if', 'in', 'initial', 'into', 'is', 'isn', 'it', 'its', 'it', 'itself', 'just',
-    'last','least', 'less', 'let', 'lets', 'let\'s', 'like', 'lot', 'made', 'make', 'many', 'may', 'maybe', 'me',
-    'might', 'mine', 'more', 'most', 'Mr', 'much', 'must', 'my', 'near', 'need', 'next', 'niether', 'no', 'nobody',
-    'nor', 'not', 'nothing', 'now', 'nowhere', 'of', 'off', 'often', 'oh', 'ok', 'okay', 'on', 'once', 'one',
-    'only', 'onto', 'or', 'other', 'our', 'ours', 'out', 'over', 'own', 'perhaps', 'previous', 'quite', 'rather',
-    're', 'really', 's', 'said', 'same', 'say', 'see', 'seems', 'several', 'shall', 'she', 'should',
-    'shouldn\'t', 'since', 'so', 'some', 'somebody', 'something', 'somewhere', 'still', 'stuff', 'such', 'than',
-    't', 'that', 'the', 'their', 'theirs', 'them', 'then', 'there', 'these', 'they', 'thing', 'things', 'this',
-    'those', 'through', 'thus', 'to', 'too', 'top', 'two', 'under', 'unless', 'until', 'up', 'upon', 'us',
-    'use', 'v', 've', 'very', 'want', 'was', 'we', 'well', 'went', 'were', 'what', 'when', 'where', 'which',
-    'while', 'who', 'whom', 'why', 'will', 'with', 'without', 'won', 'would', 'x', 'yes', 'yet', 'you', 'you',
-    'your', 'yours', 'll', 'm', 'shouldn', 'won\'t', 'hadn'
-);
