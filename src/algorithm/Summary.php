@@ -78,7 +78,7 @@ class Summary {
         foreach($line_array as $sentence){
             $summary[] = $sentence['sentence'];
         }
-        return $summary
+        return $summary;
     }
 
     public function arraycomparison_rating($vara, $varb){
