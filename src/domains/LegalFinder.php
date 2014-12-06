@@ -12,7 +12,7 @@ class LegalFinder{
 
     ];
     public static function getLegalDomain($domain){
-        $file = file_get_contents("http://" . $domain);
+        $file = @file_get_contents("http://" . $domain);
         return ($file !== false ? LegalFinder::getLegal($file, "http://" . $domain) : false);
     }
     /*

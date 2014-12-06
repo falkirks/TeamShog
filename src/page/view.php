@@ -2,13 +2,17 @@
 namespace water\page;
 
 use water\database\Domains;
+use water\domains\DomainCache;
 use water\PageRouter;
 use water\session\SessionStore;
 
 class view extends Page{
     public function showPage($message = false){
         $user = SessionStore::getCurrentSession();
-        if(count(PageRouter::getPath()) == 1) {
+        if(count(PageRouter::getPath()) == 0){
+            (new index())->showPage("You must specify a domain.");
+        }
+        else if(count(PageRouter::getPath()) == 1) {
             /*
              * Display list
              */
@@ -18,7 +22,7 @@ class view extends Page{
                     "message" => ($message === false ? false : $message),
                     "user" => $user,
                     "textview" => false,
-                    "domain" => Domains::getDomain(PageRouter::getPath()[0]), //TODO crawl domain here
+                    "domain" => DomainCache::getDomain(PageRouter::getPath()[0]),
                     "document" => false
                 ])
             ]);
@@ -33,8 +37,8 @@ class view extends Page{
                     "message" => ($message === false ? false : $message),
                     "user" => $user,
                     "textview" => true,
-                    "domain" => Domains::getDomain(PageRouter::getPath()[0]),
-                    "document" => Domains::getDocument(PageRouter::getPath()[0], PageRouter::getPath()[1])
+                    "domain" => DomainCache::getDomain(PageRouter::getPath()[0]),
+                    "document" => DomainCache::getDocument(PageRouter::getPath()[0], PageRouter::getPath()[1])
                 ])
             ]);
         }
