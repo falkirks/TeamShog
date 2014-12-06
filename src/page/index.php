@@ -1,6 +1,7 @@
 <?php
 namespace water\page;
 
+use water\domains\LegalFinder;
 use water\session\SessionStore;
 
 class index extends Page{
