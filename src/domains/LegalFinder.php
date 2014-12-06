@@ -23,27 +23,24 @@ class LegalFinder{
         $final = [];
         foreach($matches[2] as $i => $match){
             foreach(LegalFinder::$legalwords as $word) {
-                if (strstr(strtolower($match), $word) !== false){
-                    $final[$matches[2][$i]] = $matches[1][$i];
+                if (strpos(strtolower($match), $word) !== false){
+                    $path = strpos($matches[1][$i], '/') === 0 ? $url . $matches[1][$i] : $matches[1][$i]; //Handle relative links
+                    $text = LegalFinder::getTextURL($path);
+                    if($text === false) continue;
+                    $final[] = [
+                        "name" => $match,
+                        "url" => $path,
+                        "text" => $text["content"],
+                        "updated" => time(),
+                        "summarized" => "", //TODO
+                        "active" => true
+                    ];
                     break;
                 }
             }
         }
-        $new = [];
-        foreach($final as $name => $path){
-            $path = strpos($path, '/') === 0 ? $url . $path : $path; //Handle relative links
-            $text = LegalFinder::getTextURL($path);
-            if($text === false) continue;
-            $new[] = [
-                "name" => $name,
-                "url" => $path,
-                "text" => $text["content"],
-                "updated" => time(),
-                "summarized" => "", //TODO
-                "active" => true
-            ];
-        }
-        return $new;
+        return $final;
+
     }
     public static function getUpdatedDoc($url){
         $text = LegalFinder::getTextURL($url);

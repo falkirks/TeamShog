@@ -11,7 +11,7 @@ class DomainCache{
         }
         else{
             $docs = LegalFinder::getLegalDomain($name);
-            if($docs !== false){
+            if(!empty($docs)){
                 Domains::createDomain($name, $docs);
                 return [
                     '_id' => $name,
