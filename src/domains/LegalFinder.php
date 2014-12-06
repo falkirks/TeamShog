@@ -62,7 +62,7 @@ class LegalFinder{
     public static function getTextURL($url){
         $file = file_get_contents($url);
         if($file !== false) {
-            return (new Readability(file_get_contents($file)))->getContent();
+            return (new Readability($file))->getContent();
         }
         else{
             return false;
