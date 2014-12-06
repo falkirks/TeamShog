@@ -55,19 +55,19 @@
     {{/currentDraft}}
     {{^currentDraft}}
     <div class="row">
-        <div class="col-md-4">
+        <div class="col-md-6">
             <h3>Original TOS (<a href="{{url}}" target="_blank">Open in new tab</a>)</h3>
             <iframe seamless src="{{url}}"></iframe>
         </div>
-        <div class="col-md-4">
+        <div class="col-md-3">
             <h3>Step 1</h3>
             <p>Your first task is to simply cut and paste the document. Try to remove all the other fluff.</p>
-            <textarea class="form-control" name="step1" form="draft"></textarea>
+            <textarea rows="10" class="form-control" name="step1" form="draft"></textarea>
         </div>
-        <div class="col-md-4">
+        <div class="col-md-3">
             <h3>Step 2</h3>
             <p>Now do your best to summarize the points of the TOS. This is <b>your</b> draft so be as biased as you want.</p>
-            <textarea class="form-control" name="step2" form="draft"></textarea>
+            <textarea rows="10" class="form-control" name="step2" form="draft"></textarea>
         </div>
     </div>
     <div class="row">
