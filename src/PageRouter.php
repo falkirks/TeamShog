@@ -21,7 +21,7 @@ class PageRouter{
             default:
                 if(class_exists("water\\page\\$main") && is_subclass_of("water\\page\\$main", "water\\page\\Page")){
                     $page = "water\\page\\$main";
-                    /** @var  Page */
+                    /** @var Page $page */
                     $page = new $page();
                     if($page->hasPermission()){
                         $page->showPage();
