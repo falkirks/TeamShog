@@ -1,4 +1,33 @@
+<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="container">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="/">TOSThing</a>
+        </div>
+        {{#user}}
+        <div id="navbar-loggedin" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav navbar-right">
+                <li>{{_id}}</li>
+                <li><a href="/logout">Logout</a></li>
+            </ul>
+        </div>
+        {{/user}}
+        {{^user}}
+        <div id="navbar" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="/login">Login</a></li>
+                <li><a href="/register">Register</a></li>
+            </ul>
+        </div>
+        {{/user}}
+    </div>
+</nav>
 <div class="container">
+    {{#message}}
+    <div class="alert alert-info alert-dismissible" role="alert">
+        <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        {{& message }}
+    </div>
+    {{/message}}
     <div class="home">
         <div id="result">
             <hr>
@@ -7,7 +36,7 @@
             <hr>
             <form>
                 <div class="control-group">
-                    <input class="form-control" type="text" id="name" name="name" placeholder="Website Name"></input>
+                    <input class="form-control" type="text" id="name" name="name" placeholder="Website Name">
                 </div>
                 <br>
                 <div class="control-group">

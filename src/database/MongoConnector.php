@@ -2,7 +2,6 @@
 namespace water\database;
 
 use water\config\Config;
-use water\socket\Logger;
 
 /*
  * I understand that this is ugly, but it was fast and should work okay.
