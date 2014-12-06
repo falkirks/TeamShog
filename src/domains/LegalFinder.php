@@ -1,6 +1,7 @@
 <?php
 namespace water\domains;
 
+use Goose\Client;
 use water\api\Readability;
 
 class LegalFinder{
@@ -61,12 +62,8 @@ class LegalFinder{
         }
     }
     public static function getTextURL($url){
-        $file = file_get_contents($url);
-        if($file !== false) {
-            return (new Readability($file))->getContent();
-        }
-        else{
-            return false;
-        }
+        $goose = new Client();
+        $article = $goose->extractContent($url);
+        return ["content" => $article->getCleanedArticleText()];
     }
 }
