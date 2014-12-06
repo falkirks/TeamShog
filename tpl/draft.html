@@ -32,17 +32,17 @@
     {{#currentDraft}}
     <div class="row">
         <div class="col-md-4">
-            <h3>Original TOS</h3>
-            <iframe seamless src="{{url}}"></iframe>
+            <h3>Original TOS (<a href="{{url}}" target="_blank">Open in new tab</a>)</h3>
+            <iframe seamless="true" src="{{url}}"></iframe>
         </div>
         <div class="col-md-4">
             <h3>Extracted text</h3>
-            <textarea name="step1" form="draft">{{text}}</textarea>
+            <textarea class="form-control" name="step1" form="draft">{{text}}</textarea>
         </div>
         <div class="col-md-4">
             <h3>Summary</h3>
             <p>Now do your best to summarize the points of the TOS. This is <b>your</b> draft so be as biased as you want.</p>
-            <textarea name="step2" form="draft">{{summary}}</textarea>
+            <textarea class="form-control" name="step2" form="draft">{{summary}}</textarea>
         </div>
     </div>
     <div class="row">
