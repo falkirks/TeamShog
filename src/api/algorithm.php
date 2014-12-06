@@ -6,10 +6,10 @@
  * Last updated: December 6th 2014
  * TODO:Test algorithm
  */
-namespace water\algorithm;
+namespace water\api;
 
 
-class Summary {
+class algorithm {
 
     var $wordstat;
     var $stopwords;
