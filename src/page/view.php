@@ -44,10 +44,15 @@ class view extends Page{
         }
     }
     public function transformDomainArray($arr){
-        foreach($arr["documents"] as $i => $item){
-            $arr["documents"][$i]["id"] = $i;
+        if(is_array($arr)) {
+            foreach ($arr["documents"] as $i => $item) {
+                $arr["documents"][$i]["id"] = $i;
+            }
+            return $arr;
         }
-        return $arr;
+        else{
+            return false;
+        }
     }
     public function hasPermission(){
         return true;

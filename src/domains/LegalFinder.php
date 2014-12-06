@@ -24,6 +24,7 @@ class LegalFinder{
         foreach($matches[2] as $i => $match){
             foreach(LegalFinder::$legalwords as $word) {
                 if (strpos(strtolower($match), $word) !== false){
+                    echo "Found one";
                     $path = strpos($matches[1][$i], '/') === 0 ? $url . $matches[1][$i] : $matches[1][$i]; //Handle relative links
                     $text = LegalFinder::getTextURL($path);
                     if($text === false) continue;
