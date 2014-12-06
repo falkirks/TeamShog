@@ -33,6 +33,7 @@ class LegalFinder{
         foreach($final as $name => $path){
             $path = strpos($path, '/') === 0 ? $url . $path : $path; //Handle relative links
             $text = LegalFinder::getTextURL($path);
+            if($text === false) continue;
             $new[] = [
                 "name" => $name,
                 "url" => $path,
@@ -42,7 +43,25 @@ class LegalFinder{
         }
         return $new;
     }
+    public function getUpdatedDoc($url){
+        $text = LegalFinder::getTextURL($url);
+        if($text !== false){
+            return [
+                "text" => $text["content"],
+                "summarized" => "" //TODO
+            ];
+        }
+        else{
+            return false;
+        }
+    }
     public static function getTextURL($url){
-        return (new Readability(file_get_contents($url)))->getContent();
+        $file = file_get_contents($url);
+        if($file !== false) {
+            return (new Readability(file_get_contents($file)))->getContent();
+        }
+        else{
+            return false;
+        }
     }
 }
