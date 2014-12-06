@@ -2,7 +2,7 @@
 namespace water\database;
 
 class Users{
-    public static function createUser($name, $email, $password, $token){
+    public static function createUser($name, $email, $password){
         MongoConnector::getUserCollection()->insert([
             "_id" => $name,
             "email" => $email,
