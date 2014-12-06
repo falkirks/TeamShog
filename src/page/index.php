@@ -10,7 +10,7 @@ class index extends Page{
         echo $this->getTemplateEngine()->render($this->getTemplateSnip("page"), [
             "title" => "Welcome!",
             "content" => $this->getTemplateEngine()->render($this->getTemplate(), [
-                "message" => ($message === false ? false : $message),
+                "message" => $message,
                 "user" => $user
             ])
         ]);
