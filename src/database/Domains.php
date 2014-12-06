@@ -36,6 +36,20 @@ class Domains{
             return false;
         }
     }
+    public static function getDocument($domain, $id){
+        $domain = Domains::getDomain($domain);
+        if($domain !== false){
+            if(isset($domain["documents"][$id])){
+                return $domain["documents"][$id];
+            }
+            else{
+                return false;
+            }
+        }
+        else{
+            return false;
+        }
+    }
     public static function updateDomain($domain){
         return MongoConnector::getDomainsCollection()->update([$domain['_id']], $domain) != null ? true : false;
     }
