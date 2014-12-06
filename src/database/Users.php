@@ -1,20 +1,15 @@
 <?php
 namespace water\database;
 
-use water\socket\Logger;
-
 class Users{
-    public static function createUser($name, $email, $password, $token, $repos = []){
+    public static function createUser($name, $email, $password, $token){
         MongoConnector::getUserCollection()->insert([
             "_id" => $name,
             "email" => $email,
             "password" => md5($password), //TODO stronger hash
-            "token" => $token,
             "registration" => time(),
-            "lastactive" => time(),
-            "repos" => $repos,
-            "reposupdated" => @date("F j, Y, g:i a"),
-            "sessions" => []
+            "sessions" => [],
+            "isAdmin" => false
         ]);
     }
     public static function checkLogin($name, $password){
@@ -69,20 +64,8 @@ class Users{
             ]
         ]);
     }
-    public static function updateRepos($name, $repos){
-        return MongoConnector::getUserCollection()->update(["_id" => $name], [
-            '$set' => [
-                "repos" => $repos,
-                "reposupdated" => @date("F j, Y, g:i a")
-            ]
-        ]);
-    }
-    public static function isRepoOwner($user, $repo){
-        foreach(Users::getUser($user)["repos"] as $testRepo){
-            if($testRepo["name"] === $repo){
-                return  true;
-            }
-        }
-        return false;
+    public static function isAdmin($name){
+        $user = Users::getUser($name);
+        return ($user !== false && $user["isAdmin"]);
     }
 }

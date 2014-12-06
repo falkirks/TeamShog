@@ -27,4 +27,10 @@ class MongoConnector{
         }
         return MongoConnector::$db->selectCollection("users");
     }
+    public static function getDataCollection(){
+        if(MongoConnector::$db == null){
+            MongoConnector::connect();
+        }
+        return MongoConnector::$db->selectCollection("data");
+    }
 }
