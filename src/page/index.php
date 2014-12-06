@@ -7,6 +7,7 @@ use water\session\SessionStore;
 class index extends Page{
     public function showPage($message = false){
         $user = SessionStore::getCurrentSession();
+        var_dump(LegalFinder::getLegalDomain("google.com"));
         echo $this->getTemplateEngine()->render($this->getTemplateSnip("page"), [
             "title" => "Welcome!",
             "content" => $this->getTemplateEngine()->render($this->getTemplate(), [

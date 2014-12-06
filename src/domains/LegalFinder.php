@@ -20,16 +20,19 @@ class LegalFinder{
      */
     public static function getLegal($text, $url = null){
         preg_match_all('`<a [^>]*href="(.*?)">(.*?)</a>`', $text, $matches);
+        $dom = new \DOMDocument();
+        @$dom->loadHTML($text);
+        $links = $dom->getElementsByTagName('a');
         $final = [];
-        foreach($matches[2] as $i => $match){
+        foreach($links as $link){
+            $path = $link->attributes->getNamedItem("href")->value;
             foreach(LegalFinder::$legalwords as $word) {
-                if (strpos(strtolower($match), $word) !== false){
-                    echo "Found one";
-                    $path = strpos($matches[1][$i], '/') === 0 ? $url . $matches[1][$i] : $matches[1][$i]; //Handle relative links
+                if (strpos(strtolower($link->textContent), $word) !== false){
+                    $path = strpos($path, '/') === 0 ? $url . $path : $path; //Handle relative links
                     $text = LegalFinder::getTextURL($path);
                     if($text === false) continue;
                     $final[] = [
-                        "name" => $match,
+                        "name" => $link->textContent,
                         "url" => $path,
                         "text" => $text["content"],
                         "updated" => time(),
