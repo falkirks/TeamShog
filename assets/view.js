@@ -39,6 +39,7 @@ $(document).ready(function(){
             });
         });
         $(document).on("click", '.upvote', function () {
+            alert("/vote/?dir=up&domain=" + domain + "&doc=" + doc + "&sentence=" + $(this).attr('sid'));
             $.ajax({
                 url: "/vote/?dir=up&domain=" + domain + "&doc=" + doc + "&sentence=" + $(this).attr('sid'),
                 success: function(data){
