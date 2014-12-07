@@ -38,12 +38,9 @@ class LegalFinder{
                         'text' => $text,
                         'title' => $link->textContent,
                     );
-                    var_dump($params);
                     $summary = Aylien::call_api('summarize', $params);
-                    var_dump($summary);
                     //TODO:Put array into $final
                     $finalsummary = implode(" ",$summary->sentences);
-                    var_dump($finalsummary);
                     $final[] = [
                         "name" => $link->textContent,
                         "url" => $path,
@@ -67,9 +64,7 @@ class LegalFinder{
             'text' => $text,
         );
         $summary = Aylien::call_api('summarize', $params);
-        var_dump($summary);
         $finalsummary = implode(" ",$summary->sentences);
-        var_dump($finalsummary);
         if($text !== false){
             return [
                 "text" => $text,
