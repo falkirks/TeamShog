@@ -45,8 +45,7 @@ class Domains{
         $domain = Domains::getDomain($domain);
         if($domain !== false){
             $domain["documents"][$id] = $document;
-            Domains::updateDomain($domain);
-            return true;
+            return Domains::updateDomain($domain);
         }
         else{
             return false;
