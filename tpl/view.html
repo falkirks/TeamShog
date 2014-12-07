@@ -32,10 +32,10 @@
         {{#document}}
         <script>
             var cloudData = {
-            _readme: "This data is server generated."
             {{#words}}
-            ,{{word}}: {{count}}
+            {{word}}: {{count}},
             {{/words}}
+            _readme: "Server data is magical."
            };
         </script>
         <div class="row">
