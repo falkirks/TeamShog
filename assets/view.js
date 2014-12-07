@@ -8,5 +8,8 @@ $(document).ready(function(){
             $(this).html('<div class="progress-bar progress-bar-success" style="width:'+ (up/(total))*100 + '%">'+ up + '</div><div class="progress-bar progress-bar-danger" style="width:' + (down/(total))*100 + '%">' + down + '</div>');
         });
     };
+    $('.rating-buttons').on("click", function(){
+        alert($(this).html());
+    });
     generateRatingBoxes();
 });
