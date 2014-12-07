@@ -10,7 +10,7 @@ $(document).ready(function(){
     };
     var generateButtons = function(){
         $('.rating-holder .rating-buttons').each(function(index){
-            $(this).html('<a class="btn ' + (inArray(username, votes[index]["down"]) ? 'btn-default' : 'btn-danger') + ' downvote" sid="' + index + '">Downvote</a><a class="btn ' + (inArray(username, votes[index]["up"]) ? 'btn-default' : 'btn-success') + ' upvote" sid="' + index + '">Upvote</a>');
+            $(this).html('<a class="btn ' + (inArray(username, votes[index][1]) ? 'btn-default' : 'btn-danger') + ' downvote" sid="' + index + '">Downvote</a><a class="btn ' + (inArray(username, votes[index][0]) ? 'btn-default' : 'btn-success') + ' upvote" sid="' + index + '">Upvote</a>');
         });
     };
     var inArray = function(needle, haystack) {
