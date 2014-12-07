@@ -7,7 +7,7 @@ use water\session\SessionStore;
 class vote extends Page{
     public function showPage(){
         $user = SessionStore::getCurrentSession();
-        if(!empty($_GET["dir"]) && !empty($_GET["domain"]) && !empty($_GET["doc"]) && !empty($_GET["sentence"])){
+        if(isset($_GET["dir"]) && isset($_GET["domain"]) && isset($_GET["doc"]) && isset($_GET["sentence"])){
             $doc = DomainCache::getDocument($_GET["domain"], $_GET["doc"]);
             if($doc !== false && isset($doc["summary"][$_GET["sentence"]])){
                 if($_GET["dir"] === "up"){
