@@ -22,10 +22,9 @@ class index extends Page{
                 ]);
             }else{
                 $domain = GoogleSearch::getTopResultDomain($_POST["name"]);
-                //TODO make this less hacky
                 if($domain !== false) {
-                    PageRouter::setPath([$domain]);
-                    (new view())->showPage();
+                    header("Location: /view/$domain");
+                    die();
                 }
                 else{
                     echo $this->getTemplateEngine()->render($this->getTemplateSnip("page"), [
