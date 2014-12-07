@@ -31,12 +31,11 @@
     {{#textview}}
         {{#document}}
         <script>
-            var cloudData = {
-            _readme: "This data is server generated."
-            {{#words}}
-            ,{{word}}: {{count}}
-            {{/words}}
-           };
+            var cloudData = [
+                {{#words}}
+                [{{word}}, {{count}}],
+                {{/words}}
+            ];
         </script>
         <div class="row">
             <div class="col-lg-6">
