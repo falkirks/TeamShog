@@ -84,7 +84,8 @@ class LegalFinder{
         );
         $text = Aylien::call_api('extract', $params);
         if(!($text->article === NULL)){
-            return $text->article;
+            $finaltext = str_replace(“\n”, “”, $text->article);
+            return $finaltext;
         }else{
             $html = file_get_contents($url);
             if(($pos = strpos($html, "</head>")) !== false){
