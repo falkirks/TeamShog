@@ -35,7 +35,9 @@
     <h2>Why "WaterTOS"?</h2>
     <p>We aim to make reading TOS documents "flow like water" and make them as transparent as possible. In all honesty, it was an accident. That story's for another time.</p>
     <h2>How does it work?</h2>
-    <p>Our home-built bot crawls websites for their TOS documents on request. The service uses publicly available APIs to summarize the legal documents pulled and parse them into an easily readable format. In order to speed up the service as much as possible, we use a cache to keep commonly referenced TOS documents on file.</p>
+    <p>We crawl websites on demand and scrape links which appear "legally". The data in these links is then feed through the APIs at Alyien and a simple content extractor of our own. After this is complete, the text is analysed to find frequently appearing words.</p>
+    <h2>But what if a document is updated?</h2>
+    <p>Document data lives in our database for up to a week. After a week is over, the next request for the document will prompt a new download of the document (which refreshes votes). If this fails then we will keep trying every subsequent request for the page.</p>
     <h2>Tools we used</h2>
     <ul>
         <li>Google Search API</li>
