@@ -1,7 +1,6 @@
 <?php
 namespace water\domains;
 
-use Goose\Client;
 use water\api\Aylien;
 use water\api\Readability;
 
