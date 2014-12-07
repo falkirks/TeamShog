@@ -21,7 +21,7 @@ $(document).ready(function(){
             }
             return false;
         };
-        $('.upvote').on("click", function () {
+        $(document).on("click", '.downvote', function () {
             $.get("/vote?dir=up&domain=" + domain + "&doc=" + doc + "&sentence=" + $(this).attr('sid'), function (data) {
                 if (data !== "false") {
                     votes = JSON.parse(data);
@@ -31,7 +31,7 @@ $(document).ready(function(){
                 }
             });
         });
-        $('.downvote').on("click", function () {
+        $(document).on("click", '.upvote', function () {
             $.get("/vote?dir=down&domain=" + domain + "&doc=" + doc + "&sentence=" + $(this).attr('sid'), function (data) {
                 if (data !== "false") {
                     votes = JSON.parse(data);
