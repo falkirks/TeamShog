@@ -31,7 +31,7 @@
     {{#textview}}
         {{#document}}
         <div class="alert alert-warning" role="alert">
-            WaterTOS is in no way a replacement for the full terms to which you are bound. The below information has no guarantee and WaterTOS is in no way accountable for any damages caused. It is in no way legal advice. <a href="/legal">Full Legal Information</a>
+            WaterTOS is in no way a replacement for the full terms to which you are bound. The below information has no guarantee and WaterTOS is in no way accountable for any damages caused. It is in no way legal advice. <a class="alert-link" href="/legal">Full Legal Information</a>
         </div>
         <div class="page-header">
             <h1>{{_id}} {{name}}</h1>
@@ -60,7 +60,25 @@
                 <h3>Quick Summary</h3>
                 <ul>
                 {{#summary}}
-                    <li>{{.}}</li>
+                    <div class="panel panel-primary">
+                        <!--We'll have to change the color depending on votes -->
+                        <div class="panel-heading">
+                            <div class="btn-group btn-group-justified">
+                                <a href="#" class="btn danger">Downvote</a>
+                                <a href="#" class="btn success">Upvote</a>
+                            </div>
+                        </div>
+                        <div class="panel-body">
+                            <p class="lead">{{.}}</p>p>
+                            <div id="rating">
+                                <p>Rating of this summary:</p>
+                                <div class="progress">
+                                    <div class="progress-bar progress-bar-success" style="width: 90%"></div>
+                                    <div class="progress-bar progress-bar-danger" style="width: 10%"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 {{/summary}}
                 </ul>
             </div>
