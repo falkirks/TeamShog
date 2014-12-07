@@ -79,7 +79,7 @@
         {{#domain}}
             <div class="home">
                 <hr>
-                    <h1>{{id}} Documents</h1>
+                    <p class="lead">SELECT DOCUMENT</p>
                 <hr>
                 <ul>
                     {{#documents}}
@@ -92,7 +92,7 @@
         {{^domain}}
             <div class="alert alert-warning alert-dismissible" role="alert">
                 <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-                No legal documents could be found on that website. If one is added, reloading this page will reflect the change.
+                No legal documents could be found on that website. If one is added, reloading this page will reflect the change. <a href="/" class="alert-link">Back</a>
             </div>
         {{/domain}}
     {{/textview}}
