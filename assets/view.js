@@ -22,26 +22,36 @@ $(document).ready(function(){
             return false;
         };
         $(document).on("click", '.downvote', function () {
-            $.get("/vote/?dir=up&domain=" + domain + "&doc=" + doc + "&sentence=" + $(this).attr('sid'), function (data) {
-                if (data != "false") {
-                    votes = JSON.parse(data);
-                    generateRatingBoxes();
-                    generateButtons()
+            $.ajax({
+                url: "/vote/?dir=down&domain=" + domain + "&doc=" + doc + "&sentence=" + $(this).attr('sid'),
+                success: function(data){
+                    if (data != "false") {
+                        console.log(data);
+                        votes = JSON.parse(data);
+                        generateRatingBoxes();
+                        generateButtons()
 
+                    }
+                    else{
+                        alert("Vote error.");
+                    }
                 }
             });
         });
         $(document).on("click", '.upvote', function () {
-            $.get("/vote/?dir=down&domain=" + domain + "&doc=" + doc + "&sentence=" + $(this).attr('sid'), function (data) {
-                if (data != "false") {
-                    console.log(data);
-                    votes = JSON.parse(data);
-                    generateRatingBoxes();
-                    generateButtons()
+            $.ajax({
+                url: "/vote/?dir=up&domain=" + domain + "&doc=" + doc + "&sentence=" + $(this).attr('sid'),
+                success: function(data){
+                    if (data != "false") {
+                        console.log(data);
+                        votes = JSON.parse(data);
+                        generateRatingBoxes();
+                        generateButtons()
 
-                }
-                else{
-                    alert("Vote error.");
+                    }
+                    else{
+                        alert("Vote error.");
+                    }
                 }
             });
         });
