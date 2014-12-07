@@ -62,10 +62,10 @@ class vote extends Page{
         }
         return $out;
     }
-    public static function updateVotes($domain, $id, $doc){
+    public static function updateVotes($domain, $id, $summary){
         MongoConnector::getDomainsCollection()->update(["_id" => $domain], [
             '$set' => [
-                "documents.$id" => $doc
+                "documents.$id.summary" => $summary["summary"]
             ]
         ]);
     }
