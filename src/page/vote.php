@@ -20,7 +20,7 @@ class vote extends Page{
                         }
                         $doc["summary"][$_GET["sentence"]]["up"][] = $user["_id"];
                         Domains::setDocument($_GET["domain"], $_GET["doc"], $doc);
-                        echo json_encode(vote::formatArray($doc["summary"]));
+                        die(json_encode(vote::formatArray($doc["summary"])));
                     }
                 }
                 elseif($_GET["dir"] === "down"){
@@ -33,7 +33,7 @@ class vote extends Page{
                         }
                         $doc["summary"][$_GET["sentence"]]["down"][] = $user["_id"];
                         Domains::setDocument($_GET["domain"], $_GET["doc"], $doc);
-                        echo json_encode(vote::formatArray($doc["summary"]));
+                        die(json_encode(vote::formatArray($doc["summary"])));
                     }
                 }
                 else{
