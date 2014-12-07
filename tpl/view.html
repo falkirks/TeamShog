@@ -45,7 +45,11 @@
             var username = {{#user}}"{{_id}}"{{/user}}{{^user}}false{{/user}};
             var votes =
                 {{#summary}}
-                ["{{sentence}}", {{up}}, {{down}}],
+                [
+                    "{{sentence}}",
+                    {{#up}}{{.}}{{/up}},
+                    {{#down}}{{.}}{{/down}}
+                ],
                 {{/summary}}
             ];
         </script>
