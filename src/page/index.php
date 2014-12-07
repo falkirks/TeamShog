@@ -11,7 +11,7 @@ class index extends Page{
         $user = SessionStore::getCurrentSession();
 
         if(!empty($_POST["name"])) {
-            if(count($_POST)<=2){
+            if(strlen($_POST["name"])<3){
                 echo $this->getTemplateEngine()->render($this->getTemplateSnip("page"), [
                     "title" => "Login",
                     "content" => $this->getTemplateEngine()->render($this->getTemplate(), [
@@ -21,6 +21,11 @@ class index extends Page{
                 ]);
             }else{
                 //TODO:Search function in JS
+                if(!filter_var($this, FILTER_VALIDATE_URL)){
+                    //Not a URL
+                }else{
+                    //Is a URL
+                }
             }
         }else{
             echo $this->getTemplateEngine()->render($this->getTemplateSnip("page"), [
