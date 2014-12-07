@@ -42,4 +42,10 @@ class PageRouter{
     public static function getPath(){
         return PageRouter::$path;
     }
+    /*
+     * This is hacky
+     */
+    public static function setPath($path){
+        PageRouter::$path = $path;
+    }
 }
