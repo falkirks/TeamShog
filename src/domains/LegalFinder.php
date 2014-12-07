@@ -100,7 +100,8 @@ class LegalFinder{
         }
     }
     public static function getWordFrequency($string){
-        $arr = explode(" ", strtolower($string));
+        $n_words = preg_match_all('/([a-zA-Z]|\xC3[\x80-\x96\x98-\xB6\xB8-\xBF]|\xC5[\x92\x93\xA0\xA1\xB8\xBD\xBE]){4,}/', $string, $match_arr);
+        $arr = $match_arr[0];
         $ret =  [];
         foreach($arr as $word){
             if(isset($ret[$word])){
