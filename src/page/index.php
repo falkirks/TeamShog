@@ -14,7 +14,7 @@ class index extends Page{
         if(!empty($_POST["name"])) {
             if(strlen($_POST["name"]) < 3){
                 echo $this->getTemplateEngine()->render($this->getTemplateSnip("page"), [
-                    "title" => "Welcome!",
+                    "title" => "WaterTOS",
                     "content" => $this->getTemplateEngine()->render($this->getTemplate(), [
                         "message" => "Search term must be at least 3 characters long",
                         "user" => $user
