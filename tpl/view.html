@@ -30,7 +30,7 @@
     {{/message}}
     {{#textview}}
     <div class="page-header">
-        <h1>{{title}}</h1>
+        <h1>{{url}}</h1>
     </div>
         {{#document}}
         <script>
@@ -78,7 +78,7 @@
     {{^textview}}
         {{#domain}}
             <div class="home">
-                <h1>{{title}}</h1>
+                <h1>{{url}}</h1>
                 <ul>
                     {{#documents}}
                     <a class="btn btn-block btn-danger" href="/view/{{_id}}/{{id}}">{{name}}</a>
