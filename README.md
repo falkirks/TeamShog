@@ -17,6 +17,10 @@ Reading legal documents sucks. Finding legal documents is just as bad. We aim to
 * Portions of Falkirks' PHP routing script and db connector
 * Bootstrap
 * Mustache
+* Bootswatch
+* JQuery
+* wordcloud2.js
+* MongoDB
 
 ## Contacting us
 ### IRC
