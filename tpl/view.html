@@ -30,24 +30,28 @@
     {{/message}}
     {{#textview}}
         {{#document}}
+        <script>
+            var cloudData = {
+            _readme: "This data is server generated."
+            {{#words}}
+            ,{{word}}: {{count}}
+            {{/words}}
+           };
+        </script>
         <div class="row">
-            <div class="col-md-6">
-                <h3>Original TOS</h3>
-                {{#text}}
-                <p>{{& text}}</p>
-                {{/text}}
-                {{^text}}
-                    {{#user}}
-                        This document could not be crawled using our algorithm . Never fear, you can make your own draft and submit it.
-                    {{/user}}
-                    {{^user}}
-                        This document could not be crawled automatically.
-                    {{/user}}
-                {{/text}}
+            <div class="col-lg-6">
+                <h3>Word Cloud</h3>
+                <p>Word cloud goes here.</p>
             </div>
-            <div class="col-md-6">
-                <h3>Translated TOS</h3>
+            <div class="col-lg-6">
+                <h3>Quick Summary</h3>
                 <p>{{& summary}}</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <h3>Scraped data (Experimental)</h3>
+                {{text}}
             </div>
         </div>
         {{/document}}
