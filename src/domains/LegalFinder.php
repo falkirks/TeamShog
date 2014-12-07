@@ -6,9 +6,13 @@ use water\api\Aylien;
 class LegalFinder{
     public static $legalwords = [
         "terms",
+        "term",
         "privacy",
         "policy",
+        "policies",
         "conditions",
+        "condition",
+        "agreement",
         "legal",
         " tos ", //Don't match "photos"
 
