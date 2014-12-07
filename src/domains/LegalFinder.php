@@ -120,6 +120,7 @@ class LegalFinder{
         foreach($in as $item){
             $out[] = html_entity_decode($item);
         }
-        return $out;
+        //return $out;
+        return $in; //TODO fix this bug
     }
 }
