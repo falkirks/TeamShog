@@ -63,7 +63,7 @@ class LegalFinder{
             'text' => $text
         );
         $summary = Aylien::call_api('summarize', $params);
-        $finalsummary = implode(" ",$summary->sentences);
+        $finalsummary = utf8_decode(implode(" ",$summary->sentences));
         if($text !== false){
             return [
                 "text" => $text,
@@ -84,6 +84,7 @@ class LegalFinder{
         $text = Aylien::call_api('extract', $params);
         if(!($text->article === NULL)){
             $finaltext = str_replace("\n", "", $text->article);
+            $finaltext = utf8_decode($finaltext);
             return $finaltext;
         }else{
             $html = file_get_contents($url);
@@ -95,6 +96,7 @@ class LegalFinder{
             $html = preg_replace("`<select\b[^>]*>(.*?)</select>`", "", $html);
             $html = strip_tags($html);
             $html = html_entity_decode($html, ENT_QUOTES, 'UTF-8');
+            $html = utf8_decode($html);
             return $html;
         }
     }
