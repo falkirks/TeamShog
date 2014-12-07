@@ -38,14 +38,12 @@ class LegalFinder{
                             'title' => $link->textContent,
                         );
                         $summary = Aylien::call_api('summarize', $params);
-                        //TODO:Put array into $final
-                        $finalsummary = implode(" ", $summary->sentences);
                         $final[] = [
                             "name" => $link->textContent,
                             "url" => $path,
                             "text" => $text,
                             "updated" => time(),
-                            "summary" => $finalsummary, //Hopefully works
+                            "summary" => $summary, //Hopefully works
                             "active" => true,
                             "words" => LegalFinder::getWordFrequency($text)
                         ];
@@ -63,11 +61,10 @@ class LegalFinder{
             'text' => $text
         );
         $summary = Aylien::call_api('summarize', $params);
-        $finalsummary = LegalFinder::decode(implode(" ",$summary->sentences));
         if($text !== false){
             return [
                 "text" => $text,
-                "summary" => $finalsummary, //Hopefully works
+                "summary" => $summary, //Hopefully works
                 "updated" => time(),
                 "active" => true,
                 "words" => LegalFinder::getWordFrequency($text)
