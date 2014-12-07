@@ -78,15 +78,15 @@
     {{^textview}}
         {{#domain}}
             <div class="home">
-                {{#documents}}
                 <hr>
-                    <p>{{_id}} Documents</p>
+                    <h1>{{id}} Documents</h1>
                 <hr>
                 <ul>
+                    {{#documents}}
                     <a class="btn btn-block btn-danger" href="/view/{{_id}}/{{id}}">{{name}}</a>
+                    {{/documents}}
                     <a class="btn btn-block btn-primary" href="/">Back</a>
                 </ul>
-                {{/documents}}
             </div>
         {{/domain}}
         {{^domain}}
