@@ -40,12 +40,13 @@ class LegalFinder{
                     );
                     $summary = Aylien::call_api('summary', $params);
                     //TODO:Put array into $final
+                    $finalsummary = implode(" ",$summary->sentences);
                     $final[] = [
                         "name" => $link->textContent,
                         "url" => $path,
                         "text" => $text,
                         "updated" => time(),
-                        "summary" => "", //TODO
+                        "summary" => $finalsummary, //Hopefully works
                         "active" => true
                     ];
                     break;
@@ -57,10 +58,16 @@ class LegalFinder{
     }
     public static function getUpdatedDoc($url){
         $text = LegalFinder::getTextURL($url);
+        $params = array(
+            //Missing title parameter
+            'text' => $text,
+        );
+        $summary = Aylien::call_api('summary', $params);
+        $finalsummary = implode(" ",$summary->sentences);
         if($text !== false){
             return [
                 "text" => $text,
-                "summary" => "", //TODO
+                "summary" => $finalsummary, //Hopefully works
                 "updated" => time(),
                 "active" => true
             ];
