@@ -11,11 +11,11 @@ class GoogleSearch{
         curl_setopt($ch, CURLOPT_REFERER, "http://falkirks.koding.io");
         $body = curl_exec($ch);
         curl_close($ch);
-        return json_decode($body, true);
+        return json_decode($body, true)["responseData"];
     }
     public static function getTopResultDomain($query){
         $data = GoogleSearch::searchData($query);
-        var_dump($data);
+        //var_dump($data);
         if(!empty($data["results"])){
             return parse_url($data["results"][0]["unescapedUrl"])["host"];
         }
