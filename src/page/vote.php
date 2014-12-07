@@ -45,7 +45,13 @@ class vote extends Page{
             }
         }
         else{
-            echo "false";
+            if(isset($_GET["domain"]) && isset($_GET["doc"])) {
+                $doc = DomainCache::getDocument($_GET["domain"], $_GET["doc"]);
+                die(json_encode(vote::formatArray($doc["summary"])));
+            }
+            else{
+                echo "false";
+            }
         }
     }
     public static function formatArray(array $arr){

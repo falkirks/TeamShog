@@ -21,6 +21,22 @@ $(document).ready(function(){
             }
             return false;
         };
+        var fetchVotes = function(){
+            $.ajax({
+                url: "/vote/?domain=" + domain + "&doc=" + doc,
+                success: function(data){
+                    if (data != "false") {
+                        votes = JSON.parse(data);
+                        generateRatingBoxes();
+                        generateButtons()
+
+                    }
+                    else{
+                        alert("Error fetching votes.");
+                    }
+                }
+            });
+        };
         $(document).on("click", '.downvote', function () {
             $.ajax({
                 url: "/vote/?dir=down&domain=" + domain + "&doc=" + doc + "&sentence=" + $(this).attr('sid'),
@@ -56,7 +72,6 @@ $(document).ready(function(){
                 }
             });
         });
-        generateRatingBoxes();
-        generateButtons();
+        fetchVotes();
     }
 });

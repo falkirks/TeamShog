@@ -44,12 +44,8 @@
             ];
             var username = {{#user}}"{{_id}}"{{/user}}{{^user}}false{{/user}};
             var domain = {{#domain}}"{{_id}}"{{/domain}}{{^domain}}false{{/domain}};
+            var votes = [];
             var doc = "{{id}}";
-            var votes = [
-                {{#summary}}
-                [[{{#up}}{{.}},{{/up}}],[{{#down}}{{.}},{{/down}}]],
-                {{/summary}}
-            ];
         </script>
         <div class="row">
             <div class="col-lg-6">
