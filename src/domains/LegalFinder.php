@@ -43,7 +43,7 @@ class LegalFinder{
                             'text' => $text,
                             'title' => $link->textContent,
                         );
-                        $summary = LegalFinder::html_decode_array(Aylien::call_api('summarize', $params)["sentences"]);
+                        $summary = LegalFinder::prepare_sentence_array(Aylien::call_api('summarize', $params)["sentences"]);
                         $final[] = [
                             "name" => $link->textContent,
                             "url" => $path,
@@ -66,7 +66,7 @@ class LegalFinder{
         $params = array(
             'text' => $text
         );
-        $summary = LegalFinder::html_decode_array(Aylien::call_api('summarize', $params)["sentences"]);
+        $summary = LegalFinder::prepare_sentence_array(Aylien::call_api('summarize', $params)["sentences"]);
         if($text !== false){
             return [
                 "text" => $text,
@@ -119,12 +119,11 @@ class LegalFinder{
     public static function decode($string){
         return utf8_encode(html_entity_decode(htmlentities($string, ENT_QUOTES, 'UTF-8'), ENT_QUOTES , 'ISO-8859-15'));
     }
-    public static function html_decode_array(array $in){
+    public static function prepare_sentence_array(array $in){
         $out = [];
         foreach($in as $item){
-            $out[] = html_entity_decode($item);
+            $out[] = ["up" => [], "down" => [], "sentence" => $in];
         }
-        //return $out;
-        return $in; //TODO fix this bug
+        return $out;
     }
 }
