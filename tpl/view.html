@@ -34,7 +34,7 @@
             WaterTOS is in no way a replacement for the full terms to which you are bound. The below information has no guarantee and WaterTOS is in no way accountable for any damages caused. It is in no way legal advice. <a class="alert-link" href="/legal">Full Legal Information</a>
         </div>
         <div class="page-header">
-            <h1>{{_id}} {{name}}</h1>
+            <h1>{{name}}</h1>
         </div>
         <script>
             var cloudData = [
@@ -43,6 +43,7 @@
                 {{/words}}
             ];
         </script>
+        <a class="btn btn-lg btn-block bg-primary" href="{{url}}" target="_blank">View Document Source</a>
         {{#user}}
         <div class="row">
             <div class="col-md-4">
@@ -82,11 +83,6 @@
                 </ul>
             </div>
         </div>
-        <div class="row">
-            <div class="col-md-12">
-                <a class="btn btn-lg btn-block btn-success" href="{{url}}" target="_blank">View Document Source</a>
-            </div>
-        </div>
         {{/document}}
         {{^document}}
             <div class="alert alert-warning alert-dismissible" role="alert">
@@ -116,6 +112,13 @@
             </div>
         {{/domain}}
     {{/textview}}
+</div>
+<div class="text-center">
+    <a href="/about"><small>About</small></a>
+    <small> | </small>
+    <a href="/legal"><small>Legal</small></a>
+    <small> | </small>
+    <small>2014 TeamShog</small>
 </div>
 <script src="/assets/wordcloud2.js"></script>
 <script src="/assets/view.js"></script>
