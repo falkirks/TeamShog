@@ -27,7 +27,9 @@ class LegalFinder{
         $final = [];
         foreach($links as $link){
             if($link instanceof \DOMNode) {
-                $path = $link->attributes->getNamedItem("href")->value;
+                $path = $link->attributes->getNamedItem("href");
+                if($path === null) continue;
+                $path = $path->value;
                 foreach (LegalFinder::$legalwords as $word) {
                     if (strpos(strtolower($link->textContent), $word) !== false) {
                         $path = strpos($path, '/') === 0 ? $url . $path : $path; //Handle relative links
