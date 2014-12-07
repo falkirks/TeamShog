@@ -63,7 +63,7 @@ class LegalFinder{
             'text' => $text
         );
         $summary = Aylien::call_api('summarize', $params);
-        $finalsummary = utf8_decode(implode(" ",$summary->sentences));
+        $finalsummary = LegalFinder::decode(implode(" ",$summary->sentences));
         if($text !== false){
             return [
                 "text" => $text,
@@ -84,7 +84,7 @@ class LegalFinder{
         $text = Aylien::call_api('extract', $params);
         if(!($text->article === NULL)){
             $finaltext = str_replace("\n", "", $text->article);
-            $finaltext = utf8_decode($finaltext);
+            $finaltext = LegalFinder::decode($finaltext);
             return $finaltext;
         }else{
             $html = file_get_contents($url);
@@ -95,8 +95,7 @@ class LegalFinder{
             $html = preg_replace("`<script\b[^>]*>(.*?)</script>`", "", $html);
             $html = preg_replace("`<select\b[^>]*>(.*?)</select>`", "", $html);
             $html = strip_tags($html);
-            $html = html_entity_decode($html, ENT_QUOTES, 'UTF-8');
-            $html = utf8_decode($html);
+            $html = LegalFinder::decode($html);
             return $html;
         }
     }
@@ -113,5 +112,8 @@ class LegalFinder{
             }
         }
         return $ret;
+    }
+    public static function decode($string){
+        return html_entity_decode(htmlentities($string, ENT_QUOTES, 'UTF-8'), ENT_QUOTES , 'ISO-8859-15');
     }
 }
