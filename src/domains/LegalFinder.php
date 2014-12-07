@@ -2,6 +2,7 @@
 namespace water\domains;
 
 use Goose\Client;
+use water\api\Aylien;
 use water\api\Readability;
 
 class LegalFinder{
@@ -31,6 +32,12 @@ class LegalFinder{
                     $path = strpos($path, '/') === 0 ? $url . $path : $path; //Handle relative links
                     $text = LegalFinder::getTextURL($path);
                     if($text === false) continue;
+                    $params = array(
+                        'text' => $text["content"],
+                        'title' => $link->textContent,
+                    );
+                    $summary = Aylien::call_api('summary', $params);
+                    //TODO:Put array into $final
                     $final[] = [
                         "name" => $link->textContent,
                         "url" => $path,
