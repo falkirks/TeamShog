@@ -34,7 +34,7 @@ class LegalFinder{
                     $final[] = [
                         "name" => $link->textContent,
                         "url" => $path,
-                        "text" => $text["content"],
+                        "text" => $text,
                         "updated" => time(),
                         "summary" => "", //TODO
                         "active" => true
@@ -50,7 +50,7 @@ class LegalFinder{
         $text = LegalFinder::getTextURL($url);
         if($text !== false){
             return [
-                "text" => $text["content"],
+                "text" => $text,
                 "summary" => "", //TODO
                 "updated" => time(),
                 "active" => true
@@ -61,8 +61,12 @@ class LegalFinder{
         }
     }
     public static function getTextURL($url){
-        $goose = new Client();
-        $article = $goose->extractContent($url);
-        return ["content" => $article->getCleanedArticleText()];
+        $html = file_get_contents($url);
+        $html = preg_replace("`<a\b[^>]*>(.*?)</a>`", "", $html);
+        $html = preg_replace("`<script\b[^>]*>(.*?)</script>`", "", $html);
+        $html = preg_replace("`<select\b[^>]*>(.*?)</select>`", "", $html);
+        $html = strip_tags($html);
+        $html = html_entity_decode($html, ENT_QUOTES, 'UTF-8');
+        return $html;
     }
 }
