@@ -23,7 +23,7 @@ $(document).ready(function(){
         };
         $(document).on("click", '.downvote', function () {
             $.get("/vote?dir=up&domain=" + domain + "&doc=" + doc + "&sentence=" + $(this).attr('sid'), function (data) {
-                if (data !== "false") {
+                if (data != "false") {
                     votes = JSON.parse(data);
                     generateRatingBoxes();
                     generateButtons()
@@ -33,7 +33,7 @@ $(document).ready(function(){
         });
         $(document).on("click", '.upvote', function () {
             $.get("/vote?dir=down&domain=" + domain + "&doc=" + doc + "&sentence=" + $(this).attr('sid'), function (data) {
-                if (data !== "false") {
+                if (data != "false") {
                     console.log(data);
                     votes = JSON.parse(data);
                     generateRatingBoxes();
