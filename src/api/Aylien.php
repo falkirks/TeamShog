@@ -10,8 +10,8 @@ class Aylien {
         curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
         curl_setopt($ch, CURLOPT_HTTPHEADER, array(
             'Accept: application/json',
-            'X-AYLIEN-TextAPI-Application-Key: ad04ec13da667f7236466e8f4c4d2a71',
-            'X-AYLIEN-TextAPI-Application-ID: 1c72c12a'
+            'X-AYLIEN-TextAPI-Application-Key: 19e902529384e66eb84a80695f59c2cf',
+            'X-AYLIEN-TextAPI-Application-ID: 7dce084d'
         ));
         curl_setopt($ch, CURLOPT_POST, true);
         curl_setopt($ch, CURLOPT_POSTFIELDS, $parameters);
