@@ -33,6 +33,11 @@ class DomainCache{
                 }
                 Domains::setDocument($domain, $id, $doc);
             }
+            $new = [];
+            foreach($doc["words"] as $word => $count){
+                $new[] = ["word" => $word, "count" => $count];
+            }
+            $doc["words"] = $new;
             return $doc;
         }
         else{
