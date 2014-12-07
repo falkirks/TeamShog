@@ -39,7 +39,7 @@ class LegalFinder{
                             'text' => $text,
                             'title' => $link->textContent,
                         );
-                        $summary = Aylien::call_api('summarize', $params)["sentences"];
+                        $summary = html_entity_decode(Aylien::call_api('summarize', $params)["sentences"]);
                         $final[] = [
                             "name" => $link->textContent,
                             "url" => $path,
@@ -62,7 +62,7 @@ class LegalFinder{
         $params = array(
             'text' => $text
         );
-        $summary = Aylien::call_api('summarize', $params)["sentences"];
+        $summary = html_entity_decode(Aylien::call_api('summarize', $params)["sentences"]);
         if($text !== false){
             return [
                 "text" => $text,
