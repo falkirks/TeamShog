@@ -1,26 +1,35 @@
-Hackathon [![Build Status](https://travis-ci.org/Falkirks/TeamShog.svg)](https://travis-ci.org/Falkirks/TeamShog/builds)
+WaterTOS [![Build Status](https://travis-ci.org/Falkirks/TeamShog.svg)](https://travis-ci.org/Falkirks/TeamShog/builds)
 =========
+## Description
+[![Koding Hackathon](/assets/badge.png?raw=true "Koding Hackathon")](https://koding.com/Hackathon)
+## Screenshots
 
-This is the codebase for our Koding Hackathon team. Please keep on top of GitHub issues which require attention, we need to be organized.
+## APIs Used
+* Google Search API
+* Alyien Text Analysis API
 
+## Tools used
+* Portions of Falkirks' PHP routing script and db connector
+* Bootstrap
+* Mustache
+
+## Contacting us
 ### IRC
-We now have a private IRC channel. It is at **#teamshog** on **irc.freenode.net**. There is a robot (hubot) called chiphog who will make your life that much better, but he will hog all the chips. **If you can't join you will need to create an issue requesting your IRC username is invited.**
+We have an IRC channel. It is at **#teamshog** on **irc.freenode.net**. There is a robot (hubot) called chiphog who will make your life that much better, but he will hog all the chips.
+### Email
+You can email any of the team members listed in the table below for project information. General project inquiries should be dircted to Falkirks.
+### Koding
+If you want to use Koding to contact us, feel free. 
 
-### Automatic Deployment
-Code will be automatically deployed to a public Heroku instance when the Travis CI build passes.
+## Automatic Deployments
+* Code will be automatically deployed to a public Heroku instance when the Travis CI build passes. http://koding-hackathon.herokuapp.com (**currently broken**)
+* Code is deployed every 5 minutes to a Koding VM regardless of CI status. http://falkirks.koding.io
 
-http://koding-hackathon.herokuapp.com
-
-### Manual Deployment
-Code is deployed every 5 minutes to a Koding VM regardless of CI status. 
-
-http://falkirks.koding.io
-
-### Team members (in order of joining)
+## Team members (in order of joining)
 
 | Username | First Name |  Languages | Bio (short) | Role | Timezone | Email (or other contact) |
 | -------- | ---------- | ---------- | ----------- | ---- | -------- | ------------------------ |
-| Falkirks | Noah | PHP, JS, Node.js, Java, CSS | | | UTC-8 | falkirknh@gmail.com |
+| Falkirks | Noah | PHP, JS, Node.js, Java, CSS | | | UTC-8 | me@falkirks.com |
 | MegaSamNinja | Samuel | PHP, HTML, Basic Phython/JavaScript | https://twitter.com/MegaSam_ (Twitter says it all) | The Perfectionist / (back/front-end) Image Scripting / Designs| GMT+11 | Samuel_ipad2@hotmail.com |
 | TuffDev | Adam  | PHP, HTML, JavaScript (a little), CSS, MySQL, AJAX | | Make suggestions and observe proceedings.  | UTC-4 | cooladam98@gmail.com |
 | PEMapModder | - | PHP, Java | - | - | GMT+8 | pemapmodder1970@gmail.com |
