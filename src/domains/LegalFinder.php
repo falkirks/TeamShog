@@ -39,7 +39,7 @@ class LegalFinder{
                         'title' => $link->textContent,
                     );
                     var_dump($params);
-                    $summary = Aylien::call_api('summary', $params);
+                    $summary = Aylien::call_api('summarize', $params);
                     var_dump($summary);
                     //TODO:Put array into $final
                     $finalsummary = implode(" ",$summary->sentences);
@@ -66,7 +66,7 @@ class LegalFinder{
             //Missing title parameter
             'text' => $text,
         );
-        $summary = Aylien::call_api('summary', $params);
+        $summary = Aylien::call_api('summarize', $params);
         var_dump($summary);
         $finalsummary = implode(" ",$summary->sentences);
         var_dump($finalsummary);
