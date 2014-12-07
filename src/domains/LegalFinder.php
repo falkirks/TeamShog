@@ -47,7 +47,6 @@ class LegalFinder{
                         $final[] = [
                             "name" => $link->textContent,
                             "url" => $path,
-                            "text" => $text,
                             "updated" => time(),
                             "summary" => $summary, //Hopefully works
                             "active" => true,
@@ -69,7 +68,6 @@ class LegalFinder{
         $summary = LegalFinder::prepare_sentence_array(Aylien::call_api('summarize', $params)["sentences"]);
         if($text !== false){
             return [
-                "text" => $text,
                 "summary" => $summary, //Hopefully works
                 "updated" => time(),
                 "active" => true,
