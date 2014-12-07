@@ -16,6 +16,10 @@ class Aylien {
         curl_setopt($ch, CURLOPT_POST, true);
         curl_setopt($ch, CURLOPT_POSTFIELDS, $parameters);
         $response = curl_exec($ch);
-        return json_decode($response);
+        if($response === false){
+            return curl_error($ch);
+        }else {
+            return json_decode($response);
+        }
     }
 } 
