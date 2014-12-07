@@ -79,16 +79,24 @@ class LegalFinder{
         }
     }
     public static function getTextURL($url){
-        $html = file_get_contents($url);
-        if(($pos = strpos($html, "</head>")) !== false){
-            $html = substr($html, $pos+7);
+        $params = array(
+            'url' => $url,
+        );
+        $text = Aylien::call_api('extract', $params);
+        if(!($text->article === NULL)){
+            return $text->article;
+        }else{
+            $html = file_get_contents($url);
+            if(($pos = strpos($html, "</head>")) !== false){
+                $html = substr($html, $pos+7);
+            }
+            $html = preg_replace("`<a\b[^>]*>(.*?)</a>`", "", $html);
+            $html = preg_replace("`<script\b[^>]*>(.*?)</script>`", "", $html);
+            $html = preg_replace("`<select\b[^>]*>(.*?)</select>`", "", $html);
+            $html = strip_tags($html);
+            $html = html_entity_decode($html, ENT_QUOTES, 'UTF-8');
+            return $html;
         }
-        $html = preg_replace("`<a\b[^>]*>(.*?)</a>`", "", $html);
-        $html = preg_replace("`<script\b[^>]*>(.*?)</script>`", "", $html);
-        $html = preg_replace("`<select\b[^>]*>(.*?)</select>`", "", $html);
-        $html = strip_tags($html);
-        $html = html_entity_decode($html, ENT_QUOTES, 'UTF-8');
-        return $html;
     }
     public static function getWordFrequency($string){
         $arr = explode(" ", strtolower($string));
