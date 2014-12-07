@@ -20,7 +20,6 @@ class LegalFinder{
      * Do NOT call this function to get a URL, use getLegalURL
      */
     public static function getLegal($text, $url = null){
-        preg_match_all('`<a [^>]*href="(.*?)">(.*?)</a>`', $text, $matches);
         $dom = new \DOMDocument();
         @$dom->loadHTML($text);
         $links = $dom->getElementsByTagName('a');
