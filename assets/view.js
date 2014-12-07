@@ -1,3 +1,3 @@
 $(document).ready(function(){
-    WordCloud(document.getElementById('wordCloud'), { list: cloudData, minSize: 20} );
+    WordCloud(document.getElementById('wordCloud'), { list: cloudData, minSize: 15} );
 });
