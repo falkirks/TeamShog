@@ -11,6 +11,11 @@ Code will be automatically deployed to a public Heroku instance when the Travis 
 
 http://koding-hackathon.herokuapp.com
 
+### Manual Deployment
+Code is deployed every 5 minutes to a Koding VM regardless of CI status. 
+
+http://falkirks.koding.io
+
 ### Team members (in order of joining)
 
 | Username | First Name |  Languages | Bio (short) | Role | Timezone | Email (or other contact) |
