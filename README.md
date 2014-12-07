@@ -3,7 +3,9 @@ WaterTOS [![Build Status](https://travis-ci.org/Falkirks/TeamShog.svg)](https://
 ## Description
 [![Koding Hackathon](/assets/badge.png?raw=true "Koding Hackathon")](https://koding.com/Hackathon)
 ## Demo (user is logged in)
-![GIF Demo](/assets/screencast1.gif?raw=true "Koding Hackathon")
+![1](/assets/screenshot1.png?raw=true "Koding Hackathon")
+![2](/assets/screenshot2.png?raw=true "Koding Hackathon")
+![3](/assets/screenshot3.png?raw=true "Koding Hackathon")
 
 ## APIs Used
 * Google Search API
