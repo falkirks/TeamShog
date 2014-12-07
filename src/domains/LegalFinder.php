@@ -69,6 +69,9 @@ class LegalFinder{
     }
     public static function getTextURL($url){
         $html = file_get_contents($url);
+        if(($pos = strpos($html, "</head>")) !== false){
+            $html = substr($html, $pos+7);
+        }
         $html = preg_replace("`<a\b[^>]*>(.*?)</a>`", "", $html);
         $html = preg_replace("`<script\b[^>]*>(.*?)</script>`", "", $html);
         $html = preg_replace("`<select\b[^>]*>(.*?)</select>`", "", $html);
