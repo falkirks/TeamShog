@@ -15,6 +15,7 @@ class GoogleSearch{
     }
     public static function getTopResultDomain($query){
         $data = GoogleSearch::searchData($query);
+        var_dump($data);
         if(!empty($data["results"])){
             return parse_url($data["results"][0]["unescapedUrl"])["host"];
         }
