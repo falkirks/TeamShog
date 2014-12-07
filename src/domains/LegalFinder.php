@@ -9,6 +9,8 @@ class LegalFinder{
     public static $legalwords = [
         "terms",
         "privacy",
+        "policy",
+        "conditions",
         "legal",
         " tos ", //Don't match "photos"
 
