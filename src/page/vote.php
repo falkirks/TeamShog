@@ -20,7 +20,7 @@ class vote extends Page{
                         }
                         $doc["summary"][$_GET["sentence"]]["up"][] = $user["_id"];
                         Domains::setDocument($_GET["domain"], $_GET["doc"], $doc);
-                        echo json_encode($doc["summary"]);
+                        echo json_encode(vote::formatArray($doc["summary"]));
                     }
                 }
                 elseif($_GET["dir"] === "down"){
@@ -33,7 +33,7 @@ class vote extends Page{
                         }
                         $doc["summary"][$_GET["sentence"]]["down"][] = $user["_id"];
                         Domains::setDocument($_GET["domain"], $_GET["doc"], $doc);
-                        echo json_encode($doc["summary"]);
+                        echo json_encode(vote::formatArray($doc["summary"]));
                     }
                 }
                 else{
@@ -44,6 +44,13 @@ class vote extends Page{
                 echo "false";
             }
         }
+    }
+    public static function formatArray(array $arr){
+        $out = [];
+        foreach($arr as $item){
+            $out[] = [$item["up"], $item["down"]];
+        }
+        return $out;
     }
     public function hasPermission(){
         return SessionStore::hasSession();
