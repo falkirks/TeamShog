@@ -12,7 +12,7 @@ class vote extends Page{
             if($doc !== false && isset($doc["summary"][$_GET["sentence"]])){
                 if($_GET["dir"] === "up"){
                     if(in_array($user['_id'], $doc["summary"][$_GET["sentence"]]["up"])){
-                        echo "5";
+                        echo "false";
                     }
                     else {
                         if (($pos = array_search($user['_id'], $doc["summary"][$_GET["sentence"]]["down"])) !== false) {
@@ -25,7 +25,7 @@ class vote extends Page{
                 }
                 elseif($_GET["dir"] === "down"){
                     if(in_array($user['_id'], $doc["summary"][$_GET["sentence"]]["down"])){
-                        echo "4";
+                        echo "false";
                     }
                     else {
                         if (($pos = array_search($user['_id'], $doc["summary"][$_GET["sentence"]]["up"])) !== false) {
@@ -37,15 +37,15 @@ class vote extends Page{
                     }
                 }
                 else{
-                    echo "3";
+                    echo "false";
                 }
             }
             else{
-                echo "2";
+                echo "false";
             }
         }
         else{
-            echo "1";
+            echo "false";
         }
     }
     public static function formatArray(array $arr){
