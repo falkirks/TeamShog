@@ -33,16 +33,21 @@
             <hr>
             <p class="text-center lead">Login</p>
             <hr>
-            <form method="post">
-                <div class="control-group">
-                    <input class="form-control" type="text" id="username" name="username" placeholder="Username">
-                    <input class="form-control" type="password" id="password" name="password" placeholder="Password">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <form method="post">
+                        <div class="control-group">
+                            <input class="form-control" type="text" id="username" name="username" placeholder="Username">
+                            <input class="form-control" type="password" id="password" name="password" placeholder="Password">
+                        </div>
+                        <br>
+                        <div class="control-group">
+                            <button type="submit" class="btn btn-success btn-large btn-block" >Login</button>
+                            <a class="btn btn-danger" href="/register">I don't have an account!</a>
+                        </div>
+                    </form>
                 </div>
-                <br>
-                <div class="control-group">
-                    <button type="submit" class="btn btn-success btn-large btn-block" >Login</button>
-                </div>
-            </form>
+            </div>
         </div>
     </div>
 </div>
