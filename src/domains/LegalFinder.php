@@ -26,29 +26,31 @@ class LegalFinder{
         $links = $dom->getElementsByTagName('a');
         $final = [];
         foreach($links as $link){
-            $path = $link->attributes->getNamedItem("href")->value;
-            foreach(LegalFinder::$legalwords as $word) {
-                if (strpos(strtolower($link->textContent), $word) !== false){
-                    $path = strpos($path, '/') === 0 ? $url . $path : $path; //Handle relative links
-                    $text = LegalFinder::getTextURL($path);
-                    if($text === false) continue;
-                    $params = array(
-                        'text' => $text,
-                        'title' => $link->textContent,
-                    );
-                    $summary = Aylien::call_api('summarize', $params);
-                    //TODO:Put array into $final
-                    $finalsummary = implode(" ", $summary->sentences);
-                    $final[] = [
-                        "name" => $link->textContent,
-                        "url" => $path,
-                        "text" => $text,
-                        "updated" => time(),
-                        "summary" => $finalsummary, //Hopefully works
-                        "active" => true,
-                        "words" => LegalFinder::getWordFrequency($text)
-                    ];
-                    break;
+            if($link instanceof \DOMNode) {
+                $path = $link->attributes->getNamedItem("href")->value;
+                foreach (LegalFinder::$legalwords as $word) {
+                    if (strpos(strtolower($link->textContent), $word) !== false) {
+                        $path = strpos($path, '/') === 0 ? $url . $path : $path; //Handle relative links
+                        $text = LegalFinder::getTextURL($path);
+                        if ($text === false) continue;
+                        $params = array(
+                            'text' => $text,
+                            'title' => $link->textContent,
+                        );
+                        $summary = Aylien::call_api('summarize', $params);
+                        //TODO:Put array into $final
+                        $finalsummary = implode(" ", $summary->sentences);
+                        $final[] = [
+                            "name" => $link->textContent,
+                            "url" => $path,
+                            "text" => $text,
+                            "updated" => time(),
+                            "summary" => $finalsummary, //Hopefully works
+                            "active" => true,
+                            "words" => LegalFinder::getWordFrequency($text)
+                        ];
+                        break;
+                    }
                 }
             }
         }
