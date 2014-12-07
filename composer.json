@@ -3,8 +3,7 @@
     "description": "A simple chat service",
     "license": "proprietary",
     "require": {
-        "mustache/mustache": "1.0.0",
-        "scotteh/php-goose": "dev-master"
+        "mustache/mustache": "1.0.0"
     },
     "autoload": {
         "psr-4": {"water\\": "src/"}
