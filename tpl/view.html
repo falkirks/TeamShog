@@ -64,11 +64,13 @@
     {{/textview}}
     {{^textview}}
         {{#domain}}
-            <ul>
-            {{#documents}}
-                <li><a href="/view/{{_id}}/{{id}}">{{name}}</a></li>
-            {{/documents}}
-            </ul>
+            <div class="home">
+                <ul>
+                    {{#documents}}
+                    <a class="btn btn-block btn-danger" href="/view/{{_id}}/{{id}}">{{name}}</a>
+                    {{/documents}}
+                </ul>
+            </div>
         {{/domain}}
         {{^domain}}
             <div class="alert alert-warning alert-dismissible" role="alert">
