@@ -114,7 +114,8 @@ class Domains{
         }
     }
     public static function updateDomain($domain){
-        return MongoConnector::getDomainsCollection()->update([$domain['_id']], $domain) != null ? true : var_dump("Error writing to db.") != null;
+        echo "Doing update";
+        return MongoConnector::getDomainsCollection()->update([$domain['_id']], $domain) != null ? true : false;
     }
     public static function getDomain($domain){
         $domain = MongoConnector::getDomainsCollection()->findOne(["_id" => $domain]);
