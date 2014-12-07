@@ -43,7 +43,7 @@
                 {{/words}}
             ];
             var username = {{#user}}"{{_id}}"{{/user}}{{^user}}false{{/user}};
-            var votes =
+            var votes = [
                 {{#summary}}
                 [[{{#up}}{{.}},{{/up}}],[{{#down}}{{.}},{{/down}}]],
                 {{/summary}}
