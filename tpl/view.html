@@ -65,11 +65,13 @@
     {{^textview}}
         {{#domain}}
             <div class="home">
+                <p class="lead">Select Document</p>
                 <ul>
                     {{#documents}}
                     <a class="btn btn-block btn-danger" href="/view/{{_id}}/{{id}}">{{name}}</a>
                     {{/documents}}
                 </ul>
+                <a class="btn btn-block btn-primary" href="/">Back</a>
             </div>
         {{/domain}}
         {{^domain}}
