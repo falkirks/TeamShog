@@ -37,27 +37,38 @@
                 {{/words}}
             ];
         </script>
+        {{#user}}
+        <div class="row">
+            <div class="col-md-4">
+                <span class="glyphicon glyphicon-arrow-up"></span>
+                <span class="glyphicon glyphicon-arrow-down"></span>
+            </div>
+        </div>
+        {{/user}}
         <div class="row">
             <div class="col-lg-6">
                 <h3>Word Cloud</h3>
-                <canvas id="wordCloud"></canvas>
+                <canvas id="wordCloud" width="575"></canvas>
             </div>
             <div class="col-lg-6">
                 <h3>Quick Summary</h3>
-                <p>{{& summary}}</p>
+                <ul>
+                {{#summary}}
+                    <li>{{.}}</li>
+                {{/summary}}
+                </ul>
             </div>
         </div>
         <div class="row">
             <div class="col-md-12">
-                <h3>Scraped data (Experimental)</h3>
-                {{text}}
+                <a class="btn btn-lg btn-block btn-success" href="{{url}}" target="_blank">View Document Source</a>
             </div>
         </div>
         {{/document}}
         {{^document}}
             <div class="alert alert-warning alert-dismissible" role="alert">
                 <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-                That document could not be found.
+                That document could not be found. <a href="/" class="alert-link">Back</a>
             </div>
         {{/document}}
     {{/textview}}
@@ -76,7 +87,7 @@
         {{^domain}}
             <div class="alert alert-warning alert-dismissible" role="alert">
                 <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-                That domain doesn't exist yet or is invalid.
+                No legal documents could be found on that website. If one is added, reloading this page will reflect the change.
             </div>
         {{/domain}}
     {{/textview}}

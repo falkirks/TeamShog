@@ -26,29 +26,31 @@ class LegalFinder{
         $links = $dom->getElementsByTagName('a');
         $final = [];
         foreach($links as $link){
-            $path = $link->attributes->getNamedItem("href")->value;
-            foreach(LegalFinder::$legalwords as $word) {
-                if (strpos(strtolower($link->textContent), $word) !== false){
-                    $path = strpos($path, '/') === 0 ? $url . $path : $path; //Handle relative links
-                    $text = LegalFinder::getTextURL($path);
-                    if($text === false) continue;
-                    $params = array(
-                        'text' => $text,
-                        'title' => $link->textContent,
-                    );
-                    $summary = Aylien::call_api('summarize', $params);
-                    //TODO:Put array into $final
-                    $finalsummary = implode(" ", $summary->sentences);
-                    $final[] = [
-                        "name" => $link->textContent,
-                        "url" => $path,
-                        "text" => $text,
-                        "updated" => time(),
-                        "summary" => $finalsummary, //Hopefully works
-                        "active" => true,
-                        "words" => LegalFinder::getWordFrequency($text)
-                    ];
-                    break;
+            if($link instanceof \DOMNode) {
+                $path = $link->attributes->getNamedItem("href");
+                if($path === null) continue;
+                $path = $path->value;
+                foreach (LegalFinder::$legalwords as $word) {
+                    if (strpos(strtolower($link->textContent), $word) !== false) {
+                        $path = strpos($path, '/') === 0 ? $url . $path : $path; //Handle relative links
+                        $text = LegalFinder::getTextURL($path);
+                        if ($text === false) continue;
+                        $params = array(
+                            'text' => $text,
+                            'title' => $link->textContent,
+                        );
+                        $summary = LegalFinder::html_decode_array(Aylien::call_api('summarize', $params)["sentences"]);
+                        $final[] = [
+                            "name" => $link->textContent,
+                            "url" => $path,
+                            "text" => $text,
+                            "updated" => time(),
+                            "summary" => $summary, //Hopefully works
+                            "active" => true,
+                            "words" => LegalFinder::getWordFrequency($text)
+                        ];
+                        break;
+                    }
                 }
             }
         }
@@ -60,12 +62,11 @@ class LegalFinder{
         $params = array(
             'text' => $text
         );
-        $summary = Aylien::call_api('summarize', $params);
-        $finalsummary = implode(" ",$summary->sentences);
+        $summary = LegalFinder::html_decode_array(Aylien::call_api('summarize', $params)["sentences"]);
         if($text !== false){
             return [
                 "text" => $text,
-                "summary" => $finalsummary, //Hopefully works
+                "summary" => $summary, //Hopefully works
                 "updated" => time(),
                 "active" => true,
                 "words" => LegalFinder::getWordFrequency($text)
@@ -80,8 +81,9 @@ class LegalFinder{
             'url' => $url,
         );
         $text = Aylien::call_api('extract', $params);
-        if(!($text->article === NULL)){
-            $finaltext = str_replace("\n", "", $text->article);
+        if($text["article"] !== null){
+            $finaltext = str_replace("\n", "", $text["article"]);
+            $finaltext = LegalFinder::decode($finaltext);
             return $finaltext;
         }else{
             $html = file_get_contents($url);
@@ -92,7 +94,7 @@ class LegalFinder{
             $html = preg_replace("`<script\b[^>]*>(.*?)</script>`", "", $html);
             $html = preg_replace("`<select\b[^>]*>(.*?)</select>`", "", $html);
             $html = strip_tags($html);
-            $html = html_entity_decode($html, ENT_QUOTES, 'UTF-8');
+            $html = LegalFinder::decode($html);
             return $html;
         }
     }
@@ -109,5 +111,16 @@ class LegalFinder{
             }
         }
         return $ret;
+    }
+    public static function decode($string){
+        return utf8_encode(html_entity_decode(htmlentities($string, ENT_QUOTES, 'UTF-8'), ENT_QUOTES , 'ISO-8859-15'));
+    }
+    public static function html_decode_array(array $in){
+        $out = [];
+        foreach($in as $item){
+            $out[] = html_entity_decode($item);
+        }
+        //return $out;
+        return $in; //TODO fix this bug
     }
 }
