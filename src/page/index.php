@@ -29,7 +29,7 @@ class index extends Page{
                 }
                 else{
                     echo $this->getTemplateEngine()->render($this->getTemplateSnip("page"), [
-                        "title" => "Welcome!",
+                        "title" => "WaterTOS",
                         "content" => $this->getTemplateEngine()->render($this->getTemplate(), [
                             "message" => "No results could be found.",
                             "user" => $user
