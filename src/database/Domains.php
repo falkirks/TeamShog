@@ -48,6 +48,7 @@ class Domains{
                 "summary" => $summary,
                 "user" => $user
             ];
+            Domains::setDocument($domain, $id, $doc);
         }
         else{
             return false;
