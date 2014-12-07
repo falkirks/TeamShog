@@ -45,20 +45,7 @@ class view extends Page{
             ]);
         }
         else{
-            /*
-             * Display side by side view of a user draft
-             */
-            echo $this->getTemplateEngine()->render($this->getTemplateSnip("page"), [
-                "title" => "View",
-                "content" => $this->getTemplateEngine()->render($this->getTemplate(), [
-                    "message" => ($message === false ? false : $message),
-                    "user" => $user,
-                    "textview" => true,
-                    "domain" => $this->transformDomainArray(DomainCache::getDomain(PageRouter::getPath()[0])),
-                    "document" => Domains::getDraft(PageRouter::getPath()[0], PageRouter::getPath()[1], PageRouter::getPath()[2]),
-                    "isDraft" => true
-                ])
-            ]);
+            //Maybe do later
         }
     }
     public function transformDomainArray($arr){

@@ -43,14 +43,6 @@
                     {{^user}}
                         This document could not be crawled automatically.
                     {{/user}}
-                    <ul>
-                    {{#drafts}}
-                        <li><a href="/view/{{_id}}/{{id}}/{{draftid}}">{{user}}</a></li>
-                    {{/drafts}}
-                    {{^drafts}}
-                        <li>No drafts are currently available.</li>
-                    {{/drafts}}
-                    </ul>
                 {{/text}}
             </div>
             <div class="col-md-6">

@@ -38,8 +38,7 @@ class LegalFinder{
                         "text" => $text["content"],
                         "updated" => time(),
                         "summary" => "", //TODO
-                        "active" => true,
-                        "drafts" => []
+                        "active" => true
                     ];
                     break;
                 }
