@@ -1,6 +1,7 @@
 <?php
 namespace water\page;
 use water\database\Domains;
+use water\database\MongoConnector;
 use water\domains\DomainCache;
 use water\session\SessionStore;
 
@@ -19,7 +20,7 @@ class vote extends Page{
                             unset($doc["summary"][$_GET["sentence"]]["down"][$pos]);
                         }
                         $doc["summary"][$_GET["sentence"]]["up"][] = $user["_id"];
-                        var_dump(Domains::setDocument($_GET["domain"], $_GET["doc"], $doc));
+                        vote::updateVotes($_GET["domain"], $_GET["doc"], $doc);
                         die(json_encode(vote::formatArray($doc["summary"])));
                     }
                 }
@@ -32,7 +33,7 @@ class vote extends Page{
                             unset($doc["summary"][$_GET["sentence"]]["up"][$pos]);
                         }
                         $doc["summary"][$_GET["sentence"]]["down"][] = $user["_id"];
-                        Domains::setDocument($_GET["domain"], $_GET["doc"], $doc);
+                        vote::updateVotes($_GET["domain"], $_GET["doc"], $doc);
                         die(json_encode(vote::formatArray($doc["summary"])));
                     }
                 }
@@ -60,6 +61,13 @@ class vote extends Page{
             $out[] = [$item["up"], $item["down"]];
         }
         return $out;
+    }
+    public static function updateVotes($domain, $id, $doc){
+        MongoConnector::getDomainsCollection()->update(["_id" => $domain], [
+            '$set' => [
+                "documents.$id" => $doc
+            ]
+        ]);
     }
     public function hasPermission(){
         return SessionStore::hasSession();

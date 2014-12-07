@@ -85,7 +85,6 @@ class LegalFinder{
         $text = Aylien::call_api('extract', $params);
         if($text["article"] !== null){
             $finaltext = str_replace("\n", "", $text["article"]);
-            $finaltext = LegalFinder::decode($finaltext);
             return $finaltext;
         }else{
             $html = file_get_contents($url);
