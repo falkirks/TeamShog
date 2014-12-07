@@ -44,6 +44,9 @@ class vote extends Page{
                 echo "false";
             }
         }
+        else{
+            echo "false";
+        }
     }
     public static function formatArray(array $arr){
         $out = [];
