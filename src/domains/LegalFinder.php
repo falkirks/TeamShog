@@ -114,6 +114,6 @@ class LegalFinder{
         return $ret;
     }
     public static function decode($string){
-        return html_entity_decode(htmlentities($string, ENT_QUOTES, 'UTF-8'), ENT_QUOTES , 'ISO-8859-15');
+        return utf8_encode(html_entity_decode(htmlentities($string, ENT_QUOTES, 'UTF-8'), ENT_QUOTES , 'ISO-8859-15'));
     }
 }
