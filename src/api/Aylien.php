@@ -19,7 +19,8 @@ class Aylien {
         if($response === false){
             return curl_error($ch);
         }else {
-            return json_decode($response);
+            //return json_decode($response);
+            return var_dump($response);
         }
     }
 } 
