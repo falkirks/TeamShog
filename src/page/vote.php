@@ -19,7 +19,7 @@ class vote extends Page{
                             unset($doc["summary"][$_GET["sentence"]]["down"][$pos]);
                         }
                         $doc["summary"][$_GET["sentence"]]["up"][] = $user["_id"];
-                        Domains::setDocument($_GET["domain"], $_GET["doc"], $doc);
+                        var_dump(Domains::setDocument($_GET["domain"], $_GET["doc"], $doc));
                         die(json_encode(vote::formatArray($doc["summary"])));
                     }
                 }
