@@ -33,18 +33,22 @@
             <hr>
             <p class="text-center lead">Register</p>
             <hr>
-            <form method="post" action="/register">
-                <div class="control-group">
-                    <input class="form-control" type="email" id="email" name="email" placeholder="Email">
-                    <input class="form-control" type="text" id="username" name="username" placeholder="Username">
-                    <input class="form-control" type="password" id="password" name="password" placeholder="Password">
-                    <input class="form-control" type="password" id="rpassword" name="rpassword" placeholder="Password again">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <form method="post" action="/register">
+                        <div class="control-group">
+                            <input class="form-control" type="email" id="email" name="email" placeholder="Email">
+                            <input class="form-control" type="text" id="username" name="username" placeholder="Username">
+                            <input class="form-control" type="password" id="password" name="password" placeholder="Password">
+                            <input class="form-control" type="password" id="rpassword" name="rpassword" placeholder="Password again">
+                        </div>
+                        <br>
+                        <div class="control-group">
+                            <button type="submit" class="btn btn-success btn-large btn-block" >Register</button>
+                        </div>
+                    </form>
                 </div>
-                <br>
-                <div class="control-group">
-                    <button type="submit" class="btn btn-success btn-large btn-block" >Register</button>
-                </div>
-            </form>
+            </div>
         </div>
     </div>
 </div>
