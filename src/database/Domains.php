@@ -114,7 +114,7 @@ class Domains{
         }
     }
     public static function updateDomain($domain){
-        echo "Doing update";
+        var_dump($domain);
         return MongoConnector::getDomainsCollection()->update([$domain['_id']], $domain) != null ? true : false;
     }
     public static function getDomain($domain){
