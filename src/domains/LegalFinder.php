@@ -33,7 +33,7 @@ class LegalFinder{
                     $text = LegalFinder::getTextURL($path);
                     if($text === false) continue;
                     $params = array(
-                        'text' => $text["content"],
+                        'text' => $text,
                         'title' => $link->textContent,
                     );
                     $summary = Aylien::call_api('summary', $params);
