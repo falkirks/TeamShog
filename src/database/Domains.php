@@ -18,22 +18,22 @@ class Domains{
                     "url" => $url,
                     "text" => $text,
                     "summary" => $summarized,
-                    "active" => true
+                    "active" => true,
+                    "words" => []
                 ]
             ]
         ]);
     }
-    public static function updateDocument($domain, $id, $text, $summarized, $active = true){
+    public static function updateDocument($domain, $id, $text, $summary, $words, $active = true){
         $domain = Domains::getDomain($domain);
         if($domain !== false){
-            $domain["documents"][$id] = [
-                "name" => $domain["documents"][$id]["name"],
+            $domain["documents"][$id] = array_merge($domain["documents"][$id], [
                 "updated" => time(),
-                "url" => $domain["documents"][$id]["url"],
                 "text" => $text,
-                "summary" => $summarized,
-                "active" => $active
-            ];
+                "summary" => $summary,
+                "active" => $active,
+                "words" => $words
+            ]);
             Domains::updateDomain($domain);
             return true;
         }

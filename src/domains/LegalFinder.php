@@ -47,7 +47,8 @@ class LegalFinder{
                         "text" => $text,
                         "updated" => time(),
                         "summary" => $finalsummary, //Hopefully works
-                        "active" => true
+                        "active" => true,
+                        "words" => LegalFinder::getWordFrequency($text)
                     ];
                     break;
                 }
@@ -69,7 +70,8 @@ class LegalFinder{
                 "text" => $text,
                 "summary" => $finalsummary, //Hopefully works
                 "updated" => time(),
-                "active" => true
+                "active" => true,
+                "words" => LegalFinder::getWordFrequency($text)
             ];
         }
         else{
@@ -87,5 +89,18 @@ class LegalFinder{
         $html = strip_tags($html);
         $html = html_entity_decode($html, ENT_QUOTES, 'UTF-8');
         return $html;
+    }
+    public static function getWordFrequency($string){
+        $arr = explode(" ", strtolower($string));
+        $ret =  [];
+        foreach($arr as $word){
+            if(isset($ret[$word])){
+                $ret[$word]++;
+            }
+            else{
+                $ret[$word] = 0;
+            }
+        }
+        return $ret;
     }
 }
