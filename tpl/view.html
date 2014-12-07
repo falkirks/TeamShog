@@ -43,6 +43,8 @@
                 {{/words}}
             ];
             var username = {{#user}}"{{_id}}"{{/user}}{{^user}}false{{/user}};
+            var domain = {{domain._id}};
+            var doc = {{document.id}};
             var votes = [
                 {{#summary}}
                 [[{{#up}}{{.}},{{/up}}],[{{#down}}{{.}},{{/down}}]],
