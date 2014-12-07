@@ -38,6 +38,7 @@ class LegalFinder{
                         'text' => $text,
                         'title' => $link->textContent,
                     );
+                    var_dump($params);
                     $summary = Aylien::call_api('summary', $params);
                     var_dump($summary);
                     //TODO:Put array into $final
