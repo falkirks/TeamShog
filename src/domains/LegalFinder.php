@@ -9,7 +9,7 @@ class LegalFinder{
         "term",
         "privacy",
         "policy",
-        "policies",
+        //"policies", Bad idea as it usually gives a page with links
         "conditions",
         "condition",
         "agreement",
