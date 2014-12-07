@@ -42,6 +42,12 @@
                 ["{{word}}", {{count}}],
                 {{/words}}
             ];
+            var username = {{#user}}"{{_id}}"{{/user}}{{^user}}false{{/user}};
+            var votes =
+                {{#summary}}
+                ["{{sentence}}", {{up}}, {{down}}],
+                {{/summary}}
+            ];
         </script>
         <div class="row">
             <div class="col-lg-6">
@@ -51,35 +57,28 @@
             </div>
             <div class="col-lg-6">
                 <h3>Quick Summary</h3>
-                {{#user}}
-                    {{#summary}}
-                        <div class="panel panel-default">
-                            <div class="panel-body">
-                                <p>{{sentence}}</p>
-                            </div>
-                            <div class="panel-footer">
-                                <div id="rating">
-                                    <!-- Placeholders -->
-                                    <div class="progress">
-                                        <div class="progress-bar progress-bar-success" style="width: 90%">90</div>
-                                        <div class="progress-bar progress-bar-danger" style="width: 10%">10</div>
-                                    </div>
-                                    <div class="btn-group btn-group-justified">
-                                        <a href="#" class="btn btn-danger">Downvote</a>
-                                        <a href="#" class="btn btn-success">Upvote</a>
-                                    </div>
+                {{#summary}}
+                    <div class="panel panel-default">
+                        <div class="panel-body">
+                            <p>{{sentence}}</p>
+                        </div>
+                        <div class="panel-footer">
+                            <div id="rating">
+                                <!-- Placeholders -->
+                                <div class="progress">
+                                    <div class="progress-bar progress-bar-success" style="width: 90%">90</div>
+                                    <div class="progress-bar progress-bar-danger" style="width: 10%">10</div>
                                 </div>
+                                {{#user}}
+                                <div class="btn-group btn-group-justified">
+                                    <a href="#" class="btn btn-danger">Downvote</a>
+                                    <a href="#" class="btn btn-success">Upvote</a>
+                                </div>
+                                {{/user}}
                             </div>
                         </div>
-                    {{/summary}}
-                {{/user}}
-                {{^user}}
-                    <ul>
-                        {{#summary}}
-                            <li>{{sentence}}</li>
-                        {{/summary}}
-                    </ul>
-                {{/user}}
+                    </div>
+                {{/summary}}
             </div>
         </div>
         {{/document}}
