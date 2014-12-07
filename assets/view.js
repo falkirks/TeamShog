@@ -39,6 +39,9 @@ $(document).ready(function(){
                     generateButtons()
 
                 }
+                else{
+                    alert("Vote error.");
+                }
             });
         });
         generateRatingBoxes();
