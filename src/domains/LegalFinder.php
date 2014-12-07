@@ -119,7 +119,7 @@ class LegalFinder{
     public static function prepare_sentence_array(array $in){
         $out = [];
         foreach($in as $item){
-            $out[] = ["up" => [], "down" => [], "sentence" => $item];
+            $out[] = ["up" => [], "down" => [], "sentence" => htmlentities($item)];
         }
         return $out;
     }
