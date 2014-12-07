@@ -10,7 +10,8 @@ class login extends Page{
         if(!empty($_POST["username"]) && !empty($_POST["password"])){
             if(Users::checkLogin($_POST["username"], $_POST["password"])){
                 SessionStore::createSession($_POST["username"]);
-                (new index())->showPage("You are now logged in.");
+                header("Location: /"); //TODO maybe cleaner
+                die();
             }
             else{
                 echo $this->getTemplateEngine()->render($this->getTemplateSnip("page"), [
