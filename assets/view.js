@@ -34,6 +34,7 @@ $(document).ready(function(){
         $(document).on("click", '.upvote', function () {
             $.get("/vote?dir=down&domain=" + domain + "&doc=" + doc + "&sentence=" + $(this).attr('sid'), function (data) {
                 if (data !== "false") {
+                    console.log(data);
                     votes = JSON.parse(data);
                     generateRatingBoxes();
                     generateButtons()
