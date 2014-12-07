@@ -30,10 +30,10 @@ If you want to use Koding to contact us, feel free.
 
 ## Team members (in order of joining)
 
-| Username | First Name |  Languages | Bio (short) | Role | Timezone | Email (or other contact) |
-| -------- | ---------- | ---------- | ----------- | ---- | -------- | ------------------------ |
-| Falkirks | Noah | PHP, JS, Node.js, Java, CSS | | | UTC-8 | me@falkirks.com |
-| MegaSamNinja | Samuel | PHP, HTML, Basic Phython/JavaScript | https://twitter.com/MegaSam_ (Twitter says it all) | The Perfectionist / (back/front-end) Image Scripting / Designs| GMT+11 | Samuel_ipad2@hotmail.com |
-| TuffDev | Adam  | PHP, HTML, JavaScript (a little), CSS, MySQL, AJAX | | Make suggestions and observe proceedings.  | UTC-4 | cooladam98@gmail.com |
-| PEMapModder | - | PHP, Java | - | - | GMT+8 | pemapmodder1970@gmail.com |
-| 99leonchang | Leon | PHP, HTML, JS, CSS, Rudimentary C++ & Java | | Backend dev/frontend design | UTC+8 | 99leonchang@gmail.com |
+| Username | First Name |  Languages | Role | Timezone | Email |
+| -------- | ---------- | ---------- | ---- | -------- | ----- |
+| Falkirks | Noah | PHP, JS, Node.js, Java, CSS | Team lead | UTC-8 | me@falkirks.com |
+| MegaSamNinja | Samuel | PHP, HTML, Basic Phython/JavaScript | Design and UI | GMT+11 | Samuel_ipad2@hotmail.com |
+| TuffDev | Adam  | PHP, HTML, JavaScript (a little), CSS, MySQL, AJAX | Make suggestions and observe proceedings. | UTC-4 | cooladam98@gmail.com |
+| PEMapModder | "Chris" | PHP, Java | Database | GMT+8 | pemapmodder1970@gmail.com |
+| 99leonchang | Leon | PHP, HTML, JS, CSS, Rudimentary C++ & Java | Backend dev/frontend design | UTC+8 | 99leonchang@gmail.com |
