@@ -29,6 +29,9 @@
     </div>
     {{/message}}
     {{#textview}}
+    <div class="page-header">
+        <h1>{{title}}</h1>
+    </div>
         {{#document}}
         <script>
             var cloudData = [
@@ -75,7 +78,7 @@
     {{^textview}}
         {{#domain}}
             <div class="home">
-                <p class="lead">Select Document</p>
+                <h1>{{title}}</h1>
                 <ul>
                     {{#documents}}
                     <a class="btn btn-block btn-danger" href="/view/{{_id}}/{{id}}">{{name}}</a>
