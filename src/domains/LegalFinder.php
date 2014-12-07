@@ -103,7 +103,7 @@ class LegalFinder{
                 $ret[$word]++;
             }
             else{
-                $ret[$word] = 0;
+                $ret[$word] = 1;
             }
         }
         return $ret;

@@ -1,0 +1,17 @@
+<?php
+namespace water\api;
+
+class GoogleSearch{
+    const API_URL = "https://ajax.googleapis.com/ajax/services/search/web?v=1.0&q=";
+    public static function searchData($query){
+        $url = GoogleSearch::API_URL . urlencode($query) . "&userip=" . $_SERVER["REMOTE_ADDR"];
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, $url);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+        curl_setopt($ch, CURLOPT_REFERER, "http://falkirks.koding.io");
+        $body = curl_exec($ch);
+        curl_close($ch);
+        // now, process the JSON string
+        return json_decode($body, true);
+    }
+}
