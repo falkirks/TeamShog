@@ -10,7 +10,12 @@ class login extends Page{
         if(!empty($_POST["username"]) && !empty($_POST["password"])){
             if(Users::checkLogin($_POST["username"], $_POST["password"])){
                 SessionStore::createSession($_POST["username"]);
-                header("Location: /"); //TODO maybe cleaner
+                if(isset($_POST["prev"]) && parse_url($_POST["prev"])["host"] === $_SERVER['SERVER_NAME']) {
+                    header("Location: " . $_POST["prev"]); //TODO maybe cleaner
+                }
+                else{
+                    header("Location: /");
+                }
                 die();
             }
             else{
@@ -18,7 +23,8 @@ class login extends Page{
                     "title" => "Login",
                     "content" => $this->getTemplateEngine()->render($this->getTemplate(), [
                         "message" => "Username or password is incorrect.",
-                        "user" => $user
+                        "user" => $user,
+                        "prev" => $_POST["prev"]
                     ]),
                     "user" => $user
                 ]);
@@ -29,9 +35,10 @@ class login extends Page{
                 "title" => "Login",
                 "content" => $this->getTemplateEngine()->render($this->getTemplate(), [
                     "message" => ($message === false ? false : $message),
-                    "user" => $user
+                    "user" => $user,
+                    "prev" => $_SERVER['HTTP_REFERER']
                 ]),
-                "user" => $user
+                "user" => $user,
             ]);
         }
     }
