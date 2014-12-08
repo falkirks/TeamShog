@@ -3,7 +3,7 @@ WaterTOS [![Build Status](https://travis-ci.org/Falkirks/TeamShog.svg)](https://
 ## Description
 [![Koding Hackathon](/assets/badge.png?raw=true "Koding Hackathon")](https://koding.com/Hackathon)
 
-Reading legal documents sucks. Finding legal documents is just as bad. We aim to solve both of those issues (theme 3) in an interactive and creative way. A crawler is used to find "legalish" links. The link destinations are then scrutinized by Alyien and our own data extractor. This enables speedy discovery of legal documents and also heightened comprehension of those documents. 
+Reading legal documents sucks. Finding legal documents is just as bad. We aim to solve both of those issues (theme 3) in an interactive and creative way. A crawler is used to find "legalish" links. The link destinations are then scrutinized by Aylien and our own data extractor. This enables speedy discovery of legal documents and also heightened comprehension of those documents.
 ## Screenshots
 ![1](/assets/screenshot1.png?raw=true "Koding Hackathon")
 ![2](/assets/screenshot2.png?raw=true "Koding Hackathon")
@@ -11,7 +11,7 @@ Reading legal documents sucks. Finding legal documents is just as bad. We aim to
 
 ## APIs Used
 * Google Search API
-* Alyien Text Analysis API
+* Aylien Text Analysis API
 
 ## Tools used
 * Portions of Falkirks' PHP routing script and db connector
