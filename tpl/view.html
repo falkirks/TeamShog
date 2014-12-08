@@ -70,12 +70,10 @@
                 <hr>
                     <p class="lead">{{_id}}</p>
                 <hr>
-                <ul>
-                    {{#documents}}
-                    <a class="btn btn-block btn-danger" href="/view/{{_id}}/{{id}}">{{name}}</a>
-                    {{/documents}}
-                    <a class="btn btn-block btn-primary" href="/">Back</a>
-                </ul>
+                {{#documents}}
+                <a class="btn btn-block btn-danger" href="/view/{{_id}}/{{id}}">{{name}}</a>
+                {{/documents}}
+                <a class="btn btn-block btn-primary" href="/">Back</a>
             </div>
         {{/domain}}
         {{^domain}}
