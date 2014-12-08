@@ -4,6 +4,9 @@ WaterTOS [![Build Status](https://travis-ci.org/Falkirks/TeamShog.svg)](https://
 [![Koding Hackathon](/assets/badge.png?raw=true "Koding Hackathon")](https://koding.com/Hackathon)
 
 Reading legal documents sucks. Finding legal documents is just as bad. We aim to solve both of those issues (theme 3) in an interactive and creative way. A crawler is used to find "legalish" links. The link destinations are then scrutinized by Aylien and our own data extractor. This enables speedy discovery of legal documents and also heightened comprehension of those documents.
+
+If you need a demo user for the voting system you can use username `demo` and password `demo`.
+
 ## Screenshots
 ![1](/assets/screenshot1.png?raw=true "Koding Hackathon")
 ![2](/assets/screenshot2.png?raw=true "Koding Hackathon")
