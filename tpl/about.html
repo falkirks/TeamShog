@@ -5,27 +5,96 @@
         {{& message }}
     </div>
     {{/message}}
-    <div class="page-header">
-        <h1>About WaterTOS</h1>
-    </div>
-    <p>WaterTOS is a project that aims to simplify TOS documents and portray them in a creative way. We aim to make the arduous task of reading TOS documents flow like water, and in turn, fix the ignorance of legal documents</p>
-    <h2>Why "WaterTOS"?</h2>
-    <p>We aim to make reading TOS documents "flow like water" and make them as transparent as possible. In all honesty, it was an accident. That story's for another time.</p>
-    <h2>How does it work?</h2>
-    <p>We crawl websites on demand and scrape links which appear "legally". The data in these links is then feed through the APIs at Alyien and a simple content extractor of our own. After this is complete, the text is analysed to find frequently appearing words.</p>
-    <h2>But what if a document is updated?</h2>
-    <p>Document data lives in our database for up to a week. After a week is over, the next request for the document will prompt a new download of the document (which refreshes votes). If this fails then we will keep trying every subsequent request for the page.</p>
-    <h2>Tools we used</h2>
+    <h1 id="watertos-build-status-https-travis-ci-org-falkirks-teamshog-svg-https-travis-ci-org-falkirks-teamshog-builds-">WaterTOS <a href="https://travis-ci.org/Falkirks/TeamShog/builds"><img src="https://travis-ci.org/Falkirks/TeamShog.svg" alt="Build Status"></a></h1>
+    <h2 id="description">Description</h2>
+    <p><a href="https://koding.com/Hackathon"><img src="/assets/badge.png?raw=true" alt="Koding Hackathon" title="Koding Hackathon"></a></p>
+    <p>Reading legal documents sucks. Finding legal documents is just as bad. We aim to solve both of those issues (theme 3) in an interactive and creative way. A crawler is used to find &quot;legalish&quot; links. The link destinations are then scrutinized by Alyien and our own data extractor. This allows enables fast discovery of legal documents and also better comprehension of those documents. </p>
+    <h2 id="demo-user-is-logged-in-">Demo (user is logged in)</h2>
+    <p><img src="/assets/screenshot1.png?raw=true" alt="1" title="Koding Hackathon">
+        <img src="/assets/screenshot2.png?raw=true" alt="2" title="Koding Hackathon">
+        <img src="/assets/screenshot3.png?raw=true" alt="3" title="Koding Hackathon"></p>
+    <h2 id="apis-used">APIs Used</h2>
     <ul>
         <li>Google Search API</li>
-        <li>Alyien API</li>
-        <li>PHP</li>
-        <li>Apache2</li>
-        <li>Mustache Templates</li>
-        <li>wordcloud2.js</li>
-        <li>JQuery</li>
-        <li>Bootstrap</li>
+        <li>Alyien Text Analysis API</li>
     </ul>
+    <h2 id="tools-used">Tools used</h2>
+    <ul>
+        <li>Portions of Falkirks&#39; PHP routing script and db connector</li>
+        <li>Bootstrap</li>
+        <li>Mustache</li>
+        <li>Bootswatch</li>
+        <li>JQuery</li>
+        <li>wordcloud2.js</li>
+        <li>MongoDB</li>
+    </ul>
+    <h2 id="contacting-us">Contacting us</h2>
+    <h3 id="irc">IRC</h3>
+    <p>We have an IRC channel. It is at <strong>#teamshog</strong> on <strong>irc.freenode.net</strong>. There is a robot (hubot) called chiphog who will make your life that much better, but he will hog all the chips.</p>
+    <h3 id="email">Email</h3>
+    <p>You can email any of the team members listed in the table below for project information. General project inquiries should be dircted to Falkirks.</p>
+    <h3 id="koding">Koding</h3>
+    <p>If you want to use Koding to contact us, feel free. </p>
+    <h2 id="automatic-deployments">Automatic Deployments</h2>
+    <ul>
+        <li>Code will be automatically deployed to a public Heroku instance when the Travis CI build passes. <a href="http://koding-hackathon.herokuapp.com">http://koding-hackathon.herokuapp.com</a> (<strong>currently broken</strong>)</li>
+        <li>Code is deployed every 5 minutes to a Koding VM regardless of CI status. <a href="http://falkirks.koding.io">http://falkirks.koding.io</a></li>
+    </ul>
+    <h2 id="team-members-in-order-of-joining-">Team members (in order of joining)</h2>
+    <table>
+        <thead>
+        <tr>
+            <th>Username</th>
+            <th>First Name</th>
+            <th>Languages</th>
+            <th>Role</th>
+            <th>Timezone</th>
+            <th>Email</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td>Falkirks</td>
+            <td>Noah</td>
+            <td>PHP, JS, Node.js, Java, CSS</td>
+            <td>Team lead</td>
+            <td>UTC-8</td>
+            <td>me@falkirks.com</td>
+        </tr>
+        <tr>
+            <td>MegaSamNinja</td>
+            <td>Samuel</td>
+            <td>PHP, HTML, Basic Phython/JavaScript</td>
+            <td>Design and UI</td>
+            <td>GMT+11</td>
+            <td>Samuel_ipad2@hotmail.com</td>
+        </tr>
+        <tr>
+            <td>TuffDev</td>
+            <td>Adam</td>
+            <td>PHP, HTML, JavaScript (a little), CSS, MySQL, AJAX</td>
+            <td>Make suggestions and observe proceedings.</td>
+            <td>UTC-4</td>
+            <td>cooladam98@gmail.com</td>
+        </tr>
+        <tr>
+            <td>PEMapModder</td>
+            <td>&quot;Chris&quot;</td>
+            <td>PHP, Java</td>
+            <td>Database</td>
+            <td>GMT+8</td>
+            <td>pemapmodder1970@gmail.com</td>
+        </tr>
+        <tr>
+            <td>99leonchang</td>
+            <td>Leon</td>
+            <td>PHP, HTML, JS, CSS, Rudimentary C++ &amp; Java</td>
+            <td>Backend dev/frontend design</td>
+            <td>UTC+8</td>
+            <td>99leonchang@gmail.com</td>
+        </tr>
+        </tbody>
+    </table>
 </div>
 <div class="text-center">
     <a href="/about"><small>About</small></a>
