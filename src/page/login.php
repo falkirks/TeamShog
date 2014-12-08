@@ -24,7 +24,7 @@ class login extends Page{
                     "content" => $this->getTemplateEngine()->render($this->getTemplate(), [
                         "message" => "Username or password is incorrect.",
                         "user" => $user,
-                        "prev" => $_POST["prev"]
+                        "prev" => (isset($_POST["prev"]) ? $_POST["prev"] : false)
                     ]),
                     "user" => $user
                 ]);
