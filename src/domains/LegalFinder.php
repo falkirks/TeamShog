@@ -1,4 +1,5 @@
 <?php
+
 namespace water\domains;
 
 use water\api\Aylien;
@@ -61,15 +62,13 @@ class LegalFinder{
 
     }
     public static function getUpdatedDoc($url){
+        //TODO:Implement actual title
         $text = LegalFinder::getTextURL($url);
         $params = array(
-            'text' => $text
+            'text' => $text,
+            'title' => "Legal"
         );
-        /* API notes
-         * TODO:Stability of API
-         * Rotate API keys
-         */
-        var_dump(Aylien::call_api('summarize',$params));
+        //var_dump(Aylien::call_api('summarize',$params));
         $summary = LegalFinder::prepare_sentence_array(Aylien::call_api('summarize', $params)["sentences"]);
         if($text !== false){
             return [

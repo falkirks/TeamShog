@@ -1,4 +1,15 @@
 <?php
+/* ================
+ * Aylien API class
+ * ================
+ *
+ * Call using Aylien/call_api()
+ * Utilizes the Aylien.com API for text summarization
+ *
+ * API keys may occasionally need rotation
+ *
+ * Last Updated: December 8th, 2014
+ */
 
 namespace water\api;
 
@@ -20,9 +31,9 @@ class Aylien {
             return curl_error($ch);
         }else {
             //Debug:Uncomment below line and comment out production
-            return $response;
+            //return $response;
             //Production:
-            //return json_decode($response, true);
+            return json_decode($response, true);
         }
     }
 } 
