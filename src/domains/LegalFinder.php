@@ -61,12 +61,12 @@ class LegalFinder{
         return $final;
 
     }
-    public static function getUpdatedDoc($url){
+    public static function getUpdatedDoc($url, $name){
         //TODO:Implement actual title
         $text = LegalFinder::getTextURL($url);
         $params = array(
             'text' => $text,
-            'title' => "Legal"
+            'title' => $name
         );
         //var_dump(Aylien::call_api('summarize',$params));
         $summary = LegalFinder::prepare_sentence_array(Aylien::call_api('summarize', $params)["sentences"]);

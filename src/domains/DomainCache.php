@@ -24,7 +24,7 @@ class DomainCache{
         $doc = Domains::getDocument($domain, $id);
         if($doc !== false){
             if($doc["updated"] + 3600*7 < time()){
-                $data = LegalFinder::getUpdatedDoc($doc["url"]);
+                $data = LegalFinder::getUpdatedDoc($doc["url"], $doc["name"]);
                 if($data !== false) {
                     $doc = array_merge($doc, $data);
                 }
