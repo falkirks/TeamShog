@@ -33,7 +33,8 @@ class index extends Page{
                         "content" => $this->getTemplateEngine()->render($this->getTemplate(), [
                             "message" => "No results could be found.",
                             "user" => $user
-                        ])
+                        ]),
+                        "user" => $user
                     ]);
                 }
             }
@@ -43,7 +44,8 @@ class index extends Page{
                 "content" => $this->getTemplateEngine()->render($this->getTemplate(), [
                     "message" => $message,
                     "user" => $user
-                ])
+                ]),
+                "user" => $user
             ]);
         }
         //var_dump(LegalFinder::getLegalDomain("github.com"));
