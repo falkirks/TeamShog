@@ -25,7 +25,8 @@ class view extends Page{
                     "domain" => $this->transformDomainArray(DomainCache::getDomain(PageRouter::getPath()[0])),
                     "document" => false,
                     "isDraft" => false
-                ])
+                ]),
+                "user" => $user
             ]);
         }
         elseif(count(PageRouter::getPath()) == 2){
@@ -41,7 +42,8 @@ class view extends Page{
                     "domain" => $this->transformDomainArray(DomainCache::getDomain(PageRouter::getPath()[0])),
                     "document" => DomainCache::getDocument(PageRouter::getPath()[0], PageRouter::getPath()[1]),
                     "isDraft" => false
-                ])
+                ]),
+                "user" => $user
             ]);
         }
         else{

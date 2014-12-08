@@ -19,7 +19,8 @@ class login extends Page{
                     "content" => $this->getTemplateEngine()->render($this->getTemplate(), [
                         "message" => "Username or password is incorrect.",
                         "user" => $user
-                    ])
+                    ]),
+                    "user" => $user
                 ]);
             }
         }
@@ -29,7 +30,8 @@ class login extends Page{
                 "content" => $this->getTemplateEngine()->render($this->getTemplate(), [
                     "message" => ($message === false ? false : $message),
                     "user" => $user
-                ])
+                ]),
+                "user" => $user
             ]);
         }
     }

@@ -19,7 +19,8 @@ class register extends Page{
                         "content" => $this->getTemplateEngine()->render($this->getTemplate(), [
                             "message" => "A user already exists with that name.",
                             "user" => $user
-                        ])
+                        ]),
+                        "user" => $user
                     ]);
                 }
             }
@@ -29,7 +30,8 @@ class register extends Page{
                     "content" => $this->getTemplateEngine()->render($this->getTemplate(), [
                         "message" => "Passwords must match.",
                         "user" => $user
-                    ])
+                    ]),
+                    "user" => $user
                 ]);
             }
         }
@@ -39,7 +41,8 @@ class register extends Page{
                 "content" => $this->getTemplateEngine()->render($this->getTemplate(), [
                     "message" => ($message === false ? false : $message),
                     "user" => $user
-                ])
+                ]),
+                "user" => $user
             ]);
         }
     }

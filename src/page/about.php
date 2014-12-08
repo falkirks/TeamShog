@@ -12,7 +12,8 @@ class about extends Page{
             "content" => $this->getTemplateEngine()->render($this->getTemplate(), [
                 "message" => $message,
                 "user" => $user
-            ])
+            ]),
+            "user" => $user
         ]);
     }
 

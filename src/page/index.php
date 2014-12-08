@@ -18,7 +18,8 @@ class index extends Page{
                     "content" => $this->getTemplateEngine()->render($this->getTemplate(), [
                         "message" => "Search term must be at least 3 characters long",
                         "user" => $user
-                    ])
+                    ]),
+                    "user" => $user
                 ]);
             }else{
                 $domain = GoogleSearch::getTopResultDomain($_POST["name"]);
