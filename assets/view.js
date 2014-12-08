@@ -30,9 +30,6 @@ $(document).ready(function(){
                     generateButtons()
 
                 }
-                else{
-                    alert("Error fetching votes.");
-                }
             }
         });
     };
@@ -46,9 +43,6 @@ $(document).ready(function(){
                         generateRatingBoxes();
                         generateButtons()
 
-                    }
-                    else {
-                        alert("Vote error.");
                     }
                 }
             });
