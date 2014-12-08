@@ -19,7 +19,10 @@ class Aylien {
         if($response === false){
             return curl_error($ch);
         }else {
-            return json_decode($response, true);
+            //Debug:Uncomment below line and comment out production
+            return $response;
+            //Production:
+            //return json_decode($response, true);
         }
     }
 } 

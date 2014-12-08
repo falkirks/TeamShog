@@ -65,6 +65,11 @@ class LegalFinder{
         $params = array(
             'text' => $text
         );
+        /* API notes
+         * TODO:Stability of API
+         * Rotate API keys
+         */
+        var_dump(Aylien::call_api('summarize',$params));
         $summary = LegalFinder::prepare_sentence_array(Aylien::call_api('summarize', $params)["sentences"]);
         if($text !== false){
             return [
