@@ -23,7 +23,7 @@ class DomainCache{
     public static function getDocument($domain, $id){
         $doc = Domains::getDocument($domain, $id);
         if($doc !== false){
-            if($doc["updated"] + 3600*7 < time()){
+            /*(if($doc["updated"] + 3600*7 < time()){
                 $data = LegalFinder::getUpdatedDoc($doc["url"], $doc["name"]);
                 if($data !== false) {
                     $doc = array_merge($doc, $data);
@@ -32,7 +32,7 @@ class DomainCache{
                     $doc["active"] = false;
                 }
                 Domains::setDocument($domain, $id, $doc);
-            }
+            }*/
             $new = [];
             foreach($doc["words"] as $word => $count){
                 $new[] = ["word" => $word, "count" => $count];
