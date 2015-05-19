@@ -22,7 +22,7 @@ class index extends Page{
                     "user" => $user
                 ]);
             }else{
-                $domain = GoogleSearch::getTopResultDomain($_POST["name"]);
+                $domain = $_POST["name"];
                 if($domain !== false) {
                     header("Location: /view/$domain");
                     die();
